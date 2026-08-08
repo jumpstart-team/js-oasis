@@ -1,0 +1,78 @@
+/* Oasis Healthcare — design tokens
+   Colors and fonts are the practice's real brand values, extracted from the
+   live site (oasishealthcare.net, Squarespace) being rebuilt — not a new
+   palette. --color-accent-button is the one addition: the real brand
+   terracotta (--color-accent) sits at 3.4:1 against paper, which covers
+   large text/icons/borders but falls short of 4.5:1 for small button
+   labels, so button fills use ink (near-black) instead and terracotta stays
+   reserved for accents, large text, and icon fills. See README/CLAUDE.md.
+   All contrast ratios below verified against WCAG AA (4.5:1 body, 3:1 large
+   text/UI). Spacing follows a 8px base unit. */
+
+:root {
+  /* Color — semantic roles */
+  --color-paper: #EEE6E6;        /* page background */
+  --color-paper-tint: #DFCEC8;   /* alternating section background */
+  --color-ink: #1D2129;          /* primary text, primary button fill */
+  --color-slate: #3C485A;        /* dark section background, secondary text */
+  --color-accent: #D94D2A;       /* brand terracotta — icons, large text/borders on paper or ink/slate */
+  --color-accent-deep: #B93F21;  /* darker terracotta — required for text/borders on paper-tint specifically, see below */
+  --color-focus: var(--color-ink); /* focus ring color; overridden to paper inside .section--slate */
+  --color-white: #FFFFFF;
+
+  /* Contrast-verified pairings (do not use outside these pairs without re-checking):
+     ink on paper                13.13:1
+     paper on slate                7.54:1
+     paper on ink                13.13:1
+     slate on paper                7.54:1
+     ink on paper-tint            10.60:1
+     white on slate                9.26:1
+     accent on paper                3.39:1  (large text/icons/borders only, not small body)
+     accent on ink / slate     3.88 / 1.67:1 (ink OK for large text+icons; NOT slate — avoid accent text on slate)
+     accent on paper-tint          2.74:1  FAILS even the 3:1 large-text floor — do not use --color-accent
+                                             as text or a border color on a paper-tint background.
+     accent-deep on paper-tint     3.64:1  use this instead, anywhere the immediate background is paper-tint
+                                             (.section--tint or .band__figure)
+     accent-deep on paper          4.50:1  also safe on plain paper if you want the deeper shade there too
+     accent-deep on ink / slate   2.92 / 1.67:1  accent-deep is LIGHT-background only — never use it on ink/slate */
+
+  /* Typography — Tenor Sans (display) + Karla (body), the practice's real fonts */
+  --font-display: 'Tenor Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-body: 'Karla', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Type scale — 16px floor on body/UI text at every breakpoint, no exceptions */
+  --text-body: 1rem;        /* 16px — body copy, nav, buttons, inputs, list items */
+  --text-body-lg: 1.125rem; /* 18px — intro paragraphs */
+  --text-h4: 1.375rem;      /* 22px */
+  --text-h3: 1.75rem;       /* 28px */
+  --text-h2: 2.25rem;       /* 36px, 2.75rem (44px) at desktop */
+  --text-h2-desktop: 2.75rem;
+  --text-h1: 2.75rem;       /* 44px, 4rem (64px) at desktop */
+  --text-h1-desktop: 4rem;
+  --text-stat: 3rem;        /* 48px — large callout numbers ($99/mo etc.) */
+
+  /* Spacing — 8px base unit */
+  --space-1: 0.5rem;   /* 8px */
+  --space-2: 1rem;     /* 16px */
+  --space-3: 1.5rem;   /* 24px */
+  --space-4: 2rem;     /* 32px */
+  --space-5: 3rem;     /* 48px */
+  --space-6: 4rem;     /* 64px */
+  --space-7: 6rem;     /* 96px */
+  --space-8: 8rem;     /* 128px */
+
+  /* Elevation — three levels only */
+  --shadow-raised: 0 1px 2px rgba(29, 33, 41, 0.06), 0 2px 8px rgba(29, 33, 41, 0.08);
+  --shadow-overlay: 0 4px 12px rgba(29, 33, 41, 0.10), 0 12px 32px rgba(29, 33, 41, 0.14);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+
+  --max-width: 72rem; /* 1152px content measure */
+}
