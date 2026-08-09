@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Option C — Trusted DPC | Oasis Healthcare Landing Page Preview</title>
-<meta name="description" content="Homepage design option for Oasis Healthcare — trust-forward, transparent, membership-led. Preview only.">
+<title>Option C: Trusted DPC | Oasis Healthcare Landing Page Preview</title>
+<meta name="description" content="Homepage design option for Oasis Healthcare: trust-forward, transparent, membership-led. Preview only.">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="../favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,11 @@
     --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem;
     --space-5: 3rem; --space-6: 4rem; --space-7: 6rem; --space-8: 8rem;
     --max-width: 72rem;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 14px;
     --shadow-raised: 0 1px 2px rgba(29,33,41,0.08), 0 4px 16px rgba(29,33,41,0.10);
+    --shadow-overlay: 0 2px 6px rgba(29,33,41,0.10), 0 18px 36px rgba(29,33,41,0.16);
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
@@ -47,6 +51,13 @@
   .section--slate { background: var(--color-slate); color: var(--color-paper); }
   .section--slate h1, .section--slate h2, .section--slate h3 { color: var(--color-paper); }
 
+  /* Safe, progressive scroll reveal: base state is fully visible. JS adds
+     .reveal-armed right before observing, so if JS never runs nothing is
+     ever hidden. Animates opacity/transform only. */
+  [data-reveal].reveal-armed { opacity: 0; transform: translateY(20px); transition: opacity 600ms cubic-bezier(.16,1,.3,1), transform 600ms cubic-bezier(.16,1,.3,1); }
+  [data-reveal].reveal-armed.is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { [data-reveal].reveal-armed { opacity: 1; transform: none; transition: none; } }
+
   .nav { position: sticky; top: 0; z-index: 40; background: rgba(238,230,230,0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid rgba(29,33,41,0.12); }
   .nav__row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); height: 4.5rem; }
   .nav__logo img { height: 2rem; width: auto; }
@@ -54,7 +65,7 @@
   @media (min-width: 64rem) { .nav__links { display: flex; } }
   .nav__links a:hover { color: var(--color-slate); }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-weight: 600; font-size: 1rem; border-radius: 4px; border: 1.5px solid transparent; cursor: pointer; min-height: 44px; box-shadow: var(--shadow-raised); transition: transform 150ms ease; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-weight: 600; font-size: 1rem; border-radius: var(--radius-sm); border: 1.5px solid transparent; cursor: pointer; min-height: 44px; box-shadow: var(--shadow-raised); transition: transform 150ms ease; }
   .btn--slate { background: var(--color-slate); color: var(--color-paper); }
   .btn--slate:hover { background: var(--color-slate-deep); transform: translateY(-1px); }
   .btn--line { background: var(--color-paper); color: var(--color-ink); border-color: var(--color-ink); box-shadow: none; }
@@ -62,22 +73,58 @@
   .section--slate .btn--line { background: transparent; color: var(--color-paper); border-color: var(--color-paper); }
   .section--slate .btn--line:hover { background: var(--color-paper); color: var(--color-slate); }
 
-  .hero { padding-block: var(--space-7) var(--space-6); }
+  .hero { padding-block: var(--space-7) var(--space-6); position: relative; overflow: hidden; }
   @media (min-width: 48rem) { .hero { padding-block: var(--space-8) var(--space-7); } }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -25%;
+    right: -12%;
+    width: 50%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle, rgba(60,72,90,0.10) 0%, rgba(60,72,90,0) 70%);
+    pointer-events: none;
+  }
+  .hero__grid { display: grid; gap: var(--space-6); position: relative; }
+  @media (min-width: 56rem) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
   .hero h1 { font-size: 2.5rem; line-height: 1.1; max-width: 36rem; }
   @media (min-width: 48rem) { .hero h1 { font-size: 3.75rem; } }
   .hero__lede { font-size: 1.1875rem; max-width: 34rem; margin-top: var(--space-3); font-family: var(--font-body); }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
 
-  .diff-grid { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: var(--color-tan);
+    border: 1.5px dashed rgba(29,33,41,0.3);
+    border-radius: var(--radius-lg);
+    color: var(--color-ink);
+    text-align: center;
+    padding: var(--space-4);
+    box-shadow: var(--shadow-raised);
+  }
+  .photo-placeholder svg { width: 2.25rem; height: 2.25rem; opacity: 0.55; }
+  .photo-placeholder span { font-size: 0.9375rem; font-weight: 600; max-width: 14rem; line-height: 1.4; font-family: var(--font-body); }
+  .photo-placeholder--hero { aspect-ratio: 4 / 5; }
+  .photo-placeholder--square { aspect-ratio: 1; border-radius: var(--radius-md); box-shadow: none; margin-bottom: var(--space-2); }
+  .photo-placeholder--square span { font-size: 0.8125rem; }
+  .section--slate .photo-placeholder { background: rgba(238,230,230,0.08); border-color: rgba(238,230,230,0.3); color: var(--color-paper); }
+
+  .diff-grid { display: grid; gap: var(--space-4); margin-top: var(--space-6); }
   @media (min-width: 48rem) { .diff-grid { grid-template-columns: repeat(3, 1fr); } }
+  .diff-item { background: var(--color-paper); border-radius: var(--radius-md); padding: var(--space-4); box-shadow: var(--shadow-raised); transition: transform 200ms ease, box-shadow 200ms ease; }
+  .diff-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-overlay); }
   .diff-item .diff-num { font-family: var(--font-display); font-size: 3.5rem; font-weight: 700; color: var(--color-slate); line-height: 1; }
   .diff-item h3 { margin-top: var(--space-2); font-size: 1.375rem; }
   .diff-item p { margin-top: var(--space-1); font-family: var(--font-body); }
 
   .price-grid { display: grid; gap: var(--space-4); margin-top: var(--space-6); }
   @media (min-width: 48rem) { .price-grid { grid-template-columns: repeat(3, 1fr); } }
-  .price-card { background: var(--color-paper); border-radius: 6px; padding: var(--space-5) var(--space-4); box-shadow: var(--shadow-raised); }
+  .price-card { background: var(--color-paper); border-radius: var(--radius-md); padding: var(--space-5) var(--space-4); box-shadow: var(--shadow-raised); transition: transform 200ms ease, box-shadow 200ms ease; }
+  .price-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-overlay); }
   .price-card .amount { font-family: var(--font-display); font-size: 3rem; font-weight: 700; color: var(--color-slate); line-height: 1; }
   .price-card .amount span { font-family: var(--font-body); font-size: 1.125rem; font-weight: 600; color: var(--color-ink); }
   .price-card h3 { margin-top: var(--space-2); font-size: 1.25rem; }
@@ -85,10 +132,11 @@
 
   .provider-grid { display: grid; gap: var(--space-4); margin-top: var(--space-6); }
   @media (min-width: 48rem) { .provider-grid { grid-template-columns: repeat(3, 1fr); } }
-  .provider-card { background: var(--color-white); color: var(--color-ink); border-radius: 6px; padding: var(--space-4); box-shadow: var(--shadow-raised); }
-  .provider-card__mark { width: 3.25rem; height: 3.25rem; border-radius: 50%; background: var(--color-slate); color: var(--color-paper); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; margin-bottom: var(--space-2); }
+  .provider-card { background: var(--color-white); color: var(--color-ink); border-radius: var(--radius-md); padding: var(--space-4); box-shadow: var(--shadow-raised); transition: transform 200ms ease, box-shadow 200ms ease; }
+  .provider-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-overlay); }
   .provider-card__name { font-family: var(--font-body); font-weight: 700; font-size: 1.0625rem; color: var(--color-ink); }
   .provider-card__role { font-size: 0.9375rem; color: var(--color-slate); font-weight: 600; margin-top: 0.15em; }
+  .provider-card .photo-placeholder { background: var(--color-tan); border-color: rgba(29,33,41,0.3); color: var(--color-ink); }
 
   .footer { background: var(--color-slate); color: var(--color-paper); padding-block: var(--space-6); }
   .footer a { text-decoration: underline; }
@@ -97,7 +145,7 @@
 </head>
 <body>
 <div class="previewbar">
-  <span>Design option C of 3 &mdash; <strong>Trusted DPC</strong>, inspired by the transparent-pricing/differentiation structure Laura flagged, with stronger visual craft.</span>
+  <span>Design option C of 3: <strong>Trusted DPC</strong>, inspired by the transparent-pricing/differentiation structure Laura flagged, with stronger visual craft.</span>
   <a href="index.html">Compare all 3 options</a>
 </div>
 
@@ -118,18 +166,26 @@
 
 <main id="top">
   <section class="hero wrap">
-    <h1>A different way to see your provider.</h1>
-    <p class="hero__lede">Oasis Healthcare membership means one flat monthly fee, direct access to your provider, and no insurance middlemen &mdash; alongside full urgent and primary care, and a medical spa, all in Grafton, WI.</p>
-    <div class="hero__actions">
-      <a class="btn btn--slate" href="../contact.html">Schedule a conversation</a>
-      <a class="btn btn--line" href="#pricing">See membership pricing</a>
+    <div class="hero__grid">
+      <div>
+        <h1>A different way to see your provider.</h1>
+        <p class="hero__lede">Oasis Healthcare membership means one flat monthly fee, direct access to your provider, and no insurance middlemen: alongside full urgent and primary care, and a medical spa, all in Grafton, WI.</p>
+        <div class="hero__actions">
+          <a class="btn btn--slate" href="../contact.html">Schedule a conversation</a>
+          <a class="btn btn--line" href="#pricing">See membership pricing</a>
+        </div>
+      </div>
+      <div class="photo-placeholder photo-placeholder--hero" data-reveal role="img" aria-label="Photo placeholder">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Photo: Laura, portrait or in-clinic</span>
+      </div>
     </div>
   </section>
 
   <section class="section section--tan">
     <div class="wrap">
-      <h2 style="font-size: 2.25rem; max-width: 30rem;">How we're different.</h2>
-      <div class="diff-grid">
+      <h2 style="font-size: 2.25rem; max-width: 30rem;" data-reveal>How we're different.</h2>
+      <div class="diff-grid" data-reveal>
         <div class="diff-item">
           <div class="diff-num">1</div>
           <h3>Real time with your provider</h3>
@@ -143,7 +199,7 @@
         <div class="diff-item">
           <div class="diff-num">3</div>
           <h3>Still your insurance, if you want it</h3>
-          <p>Membership is optional &mdash; we still accept a full panel of insurance for everyday visits.</p>
+          <p>Membership is optional. We still accept a full panel of insurance for everyday visits.</p>
         </div>
       </div>
     </div>
@@ -151,9 +207,9 @@
 
   <section class="section" id="pricing">
     <div class="wrap">
-      <h2 style="font-size: 2.25rem;">Membership pricing.</h2>
-      <p style="margin-top: var(--space-2); max-width: 34rem; font-family: var(--font-body);">Monthly, with the option to pay annually. Cancel or change plans anytime.</p>
-      <div class="price-grid">
+      <h2 style="font-size: 2.25rem;" data-reveal>Membership pricing.</h2>
+      <p style="margin-top: var(--space-2); max-width: 34rem; font-family: var(--font-body);" data-reveal>Monthly, with the option to pay annually. Cancel or change plans anytime.</p>
+      <div class="price-grid" data-reveal>
         <div class="price-card">
           <div class="amount">$99<span>/mo</span></div>
           <h3>Individual</h3>
@@ -175,20 +231,29 @@
 
   <section class="section section--slate">
     <div class="wrap">
-      <h2 style="font-size: 2.25rem;">Your providers.</h2>
-      <div class="provider-grid">
+      <h2 style="font-size: 2.25rem;" data-reveal>Your providers.</h2>
+      <div class="provider-grid" data-reveal>
         <div class="provider-card">
-          <div class="provider-card__mark">L</div>
+          <div class="photo-placeholder photo-placeholder--square" role="img" aria-label="Photo placeholder: Laura Mckinnis">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Photo: Laura</span>
+          </div>
           <div class="provider-card__name">Laura Mckinnis, APNP</div>
           <div class="provider-card__role">Owner &amp; Provider</div>
         </div>
         <div class="provider-card">
-          <div class="provider-card__mark">K</div>
+          <div class="photo-placeholder photo-placeholder--square" role="img" aria-label="Photo placeholder: Katie Henke">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Photo: Katie</span>
+          </div>
           <div class="provider-card__name">Katie Henke, NP</div>
           <div class="provider-card__role">Specialty Care Provider</div>
         </div>
         <div class="provider-card">
-          <div class="provider-card__mark">K</div>
+          <div class="photo-placeholder photo-placeholder--square" role="img" aria-label="Photo placeholder: Kelly Plagemann">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            <span>Photo: Kelly</span>
+          </div>
           <div class="provider-card__name">Kelly Plagemann, PA-C</div>
           <div class="provider-card__role">Provider</div>
         </div>
@@ -197,7 +262,7 @@
   </section>
 
   <section class="section" style="text-align:center;">
-    <div class="wrap">
+    <div class="wrap" data-reveal>
       <h2 style="font-size: 2.5rem;">Let's find the right plan for you.</h2>
       <div class="hero__actions" style="justify-content:center;">
         <a class="btn btn--slate" href="../contact.html">Schedule a conversation</a>
@@ -210,8 +275,25 @@
 <footer class="footer">
   <div class="wrap">
     <p>Oasis Healthcare &middot; 1505 Wisconsin Ave Ste 150, Grafton, WI 53024 &middot; <a href="tel:+12624218961">(262) 421-8961</a></p>
-    <p class="footer__bottom">Design option preview &mdash; not the live site. <a href="index.html">Back to comparison</a>.</p>
+    <p class="footer__bottom">Design option preview (not the live site). <a href="index.html">Back to comparison</a>.</p>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var targets = document.querySelectorAll('[data-reveal]');
+  if (!targets.length || !('IntersectionObserver' in window)) return;
+  targets.forEach(function (el) { el.classList.add('reveal-armed'); });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+  targets.forEach(function (el) { io.observe(el); });
+});
+</script>
 </body>
 </html>
