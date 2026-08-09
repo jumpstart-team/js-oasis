@@ -7,28 +7,48 @@ Healthcare (urgent + primary care, Laura Mckinnis APNP), Oasis Collaborative
 (direct primary care for POTS/headache/primary care, Katie Henke DNP), and
 Oasis MedSpa (Xeomin, IV hydration, skincare, treatment packages).
 
-## Status: real content built, a few facts need client confirmation
+## Status: real content built, client-confirmed
 
-`content-brief.md` at repo root is the source-of-truth brief, harvested and
-verified directly from the live site (all 17 of its pages, cross-checked
-against raw HTML/CSS for exact colors, fonts, and copy). All page content in
-this repo comes from that brief — nothing invented. Three things it flags
-still need the client's sign-off before this goes live:
+`content-brief.md` at repo root is the source-of-truth brief: the original
+live-site crawl (all 17 pages, cross-checked against raw HTML/CSS) plus a
+"Client updates" section layering in two later, more authoritative sources —
+a branding/website call transcript and the signed JumpStart intake
+questionnaire (both supplied by the user, not fetched). Where those conflict
+with the live site or with each other, the intake form (Laura's own written
+submission) wins. Nothing on the site is invented.
 
-- **Oasis Collaborative hours conflict on the live site itself** (one page
-  lists Wed 8am–12pm, another omits it). Went with the version that includes
-  Wednesday (`/appointments`, the more complete source) — confirm before publish.
-- **Provider credentials are spelled inconsistently site-wide** (Laura:
-  NP/APNP/APNP-C; Katie: DNP/APNP/APNP-C). Used "Laura Mckinnis, APNP" and
-  "Katie Henke, DNP" (the most common spelling per page) — confirm the correct
-  formal credential line for each before publish.
-- **No real pricing exists yet** for Oasis Collaborative DPC membership,
-  MedSpa treatment packages, or Xeomin per-unit cost — not on the live site
-  at all. Pages say so honestly ("call for current pricing") rather than
-  inventing numbers.
+What changed based on those two sources (see `content-brief.md` "Client
+updates" for the full reasoning):
 
-Get client sign-off on those three before this ships. Don't silently resolve
-them a different way without updating `content-brief.md` too.
+- **Oasis Collaborative is no longer a separate patient-facing brand.**
+  Per the call, it's becoming an internal MSO; the site now presents one
+  practice (Oasis Healthcare) with membership as a payment/care model, not a
+  separate business. `collaborative.html` was removed; that content now
+  lives in `membership.html` (Direct Primary Care / specialty care with
+  Katie Henke) plus a membership section on `healthcare.html`.
+- **Real membership pricing applied everywhere:** $99/mo individual,
+  $249/mo family max, $149/mo specialty care (weight loss, neurology/other
+  specialists, patients 65+) — confirmed by both the call and the intake form.
+- **Provider credentials resolved via the intake form's official bios:**
+  "Laura Mckinnis, APNP" and "Katie Henke, NP" (plainer than earlier
+  guesses — the intake form is the authoritative source, confirmed by the user).
+- **Membership hours resolved:** Mon 12–3pm, Fri 8am–2pm only, no Wednesday.
+- **MedSpa/treatment-package pricing stays off the site deliberately** — not
+  a gap to fill later. The client tried publishing it before and pulled it
+  after complaints; copy reflects "ask at your consultation," not "coming soon."
+- **Weight loss elevated in prominence** per Laura's explicit request (it's
+  a major patient-acquisition channel) — has its own home-page band and a
+  dedicated section on `healthcare.html`, not just a bullet in a service list.
+- Real social links added (Instagram, Facebook — from the intake form).
+- **Not yet added:** Women's health / HRT content — the intake form requests
+  it but gave no specifics (services, provider, pricing); explicitly waiting
+  on the client rather than inventing details. Also not yet added: numeric
+  price-comparison figures (built a qualitative comparison instead — no
+  invented dollar amounts). A future service-area change is under
+  discussion (not yet public) — this repo is public, so exact details are
+  intentionally not logged here; the footer's "serving the greater
+  Milwaukee area" phrasing is deliberate and shouldn't be read as claiming
+  a new office exists.
 
 ## Stack
 
@@ -39,7 +59,7 @@ static bundle. Structure mirrors what those sibling repos export, authored
 directly instead of generated:
 
 ```
-index.html, healthcare.html, collaborative.html, medspa.html,
+index.html, healthcare.html, membership.html, medspa.html,
 about.html, contact.html
 tokens.css   (design tokens — real brand colors/fonts, see below)
 styles.css   (@imports tokens.css)
@@ -52,11 +72,10 @@ needs interactivity (mobile nav, accordions, tab toggles) gets a small
 vanilla-JS behavior in `site.js` keyed off `data-*` attributes, same pattern
 as other JumpStart sites' exports.
 
-The 17-page IA on the live site got consolidated to 6: each of the three
-divisions (urgent/primary care, DPC, MedSpa) got one page instead of 4-6,
-with pricing/FAQs folded in as sections rather than separate pages. This was
-a judgment call for clarity, not a client request — flag it if they'd rather
-keep the old page count.
+The 17-page IA on the live site got consolidated to 6 (originally scoped as
+3 divisions × several pages each; now 1 practice × 6 pages, `membership.html`
+replacing the old `collaborative.html` per the business-structure change
+above). Pricing/FAQs are folded in as sections rather than separate pages.
 
 ## Design skills
 

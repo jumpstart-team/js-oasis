@@ -291,3 +291,117 @@ No alternate lockup (horizontal, reversed/white, icon-only) was found anywhere i
 | 17 | `/appointments` | Central booking hub: per-division/provider hours summary + live links to Tebra (both providers) and Kareo (practice-wide + Laura McKinnis MedSpa booking). Fetched successfully, confirmed via raw HTML including actual outbound booking URLs. |
 
 All 17 pages returned usable content — none failed to fetch. The only genuine gaps in the source material (not fetch failures, but content the client's own site doesn't publish) are: **Oasis Collaborative DPC membership pricing** (page 10) and **prices for the 5 MedSpa treatment packages** (page 14) and **Botox/Xeomin per-unit pricing** (page 15) — none of these are published anywhere on the live site and will need to come directly from the client.
+
+---
+
+## 6. Client updates (supersede the live-site crawl above where they conflict)
+
+Two documents supplied directly by the user after the initial rebuild, both
+more authoritative than the live-site crawl in Sections 1–5: a recorded
+branding/website call between JumpStart (Eric Caballero, Joanna De Jesus
+Flores) and the client (Laura McKinnis), and JumpStart's signed "Website &
+Marketing Questionnaire" intake form (submitted by Laura McKinnis, Aug 5,
+2026). Where the two disagree with each other, **the intake form wins** —
+it's Laura's own written submission, dated after the call. Nothing below is
+inferred; every line traces to one of these two sources.
+
+**Business structure — Oasis Collaborative is being retired as a brand.**
+Per the call, Laura is restructuring so "Oasis Healthcare" is the single
+front-facing name for everything; Oasis Collaborative becomes an internal
+MSO (management service organization), not a patient-facing business. This
+was described as still pending an attorney meeting at call time, but is the
+clear stated direction, and the user confirmed applying it now. Site
+impact: `collaborative.html` removed; its content (POTS/headache/neurology
+care, DPC explanation, FAQ) now lives in `membership.html`, framed as "how
+you pay for care" under one practice rather than a separate business. The
+intake form separately and explicitly requests a "DPC info page," so the
+dedicated page was kept — just not branded as "Oasis Collaborative."
+
+**Confirmed real membership pricing** (call + intake form agree exactly):
+- **$99/month** — individual, no age banding between kids and adults
+- **$249/month** — family, max
+- **$149/month** — specialty care: weight loss program, specialist care
+  (neurology and related specialists), and patients 65 and older
+
+This replaces the single "$99/mo Clinic Membership" figure in Section 3
+above, which undersold the real structure — specialty/neurology care (what
+Oasis Collaborative used to cover) is part of this $149 tier, not unpriced.
+
+**Provider credentials — resolved via the intake form's official bios**
+(the form has a dedicated "Provider Biographies" section, written in
+first/third person as if meant to be published verbatim):
+- **Laura Mckinnis, APNP** (not APNP-C — an earlier round of questions
+  guessed APNP-C before this form surfaced; the user confirmed the intake
+  form's plainer "APNP" is correct)
+- **Katie Henke, NP** (not DNP — same correction; NP is what her official
+  bio in the intake form uses)
+- **Angela Wenzel, RN** — the intake form gives her last name; the live
+  site crawl in Section 2 only had "Angela, RN"
+
+**Membership/specialty-care hours — resolved** (the call didn't address
+this; the user picked directly): **Monday 12–3pm, Friday 8am–2pm only, no
+Wednesday.** This overturns the Section 1 guess, which had gone with the
+version that included Wednesday.
+
+**MedSpa/treatment-package pricing is deliberately withheld, not a gap.**
+Per the call, Laura tried publishing full pricing when they started and
+"it only led to complaints... as soon as we pulled all the pricing off,
+everybody's fine." This is an intentional, ongoing business choice, not
+something waiting on the client to supply — site copy says "we quote
+pricing at your consultation," not "coming soon" or "not yet published."
+
+**Weight loss needs to be prominent.** Direct quote from the call: "we do
+a large percentage of our patients find us because of weight loss... that
+probably needs to be in there fairly high." It now has its own home-page
+band and a dedicated, elevated section on `healthcare.html` (previously
+just one bullet among five services).
+
+**Real mission/vision copy, from the intake form** (used more directly in
+`about.html`'s hero than the paraphrase this repo started with): *"We are
+owned by clinicians. Our vision is to make healthcare accessible and
+affordable... healthcare is scary for people. We want to remove barriers
+of access to healthcare... Our clinic is warm, inviting, and feels like
+home. We offer care across the lifespan from children to adults."*
+
+**Audience, from the intake form:** ideal patients are women 30–50;
+membership/DPC patients skew small-business owners, self-employed in their
+20s without insurance, or adults 63–67 not yet Medicare-eligible. Brand
+should feel "warm, welcoming, healthcare specific but not industrial or
+clinical." (Specific internal business/revenue targets from the intake form
+are intentionally not logged here — this repo is public — see the session
+notes if you need them.)
+
+**Real social handles, from the intake form:** Instagram `oasis.healthcare`,
+Facebook `https://www.facebook.com/OASISHEALTHCARE.hereforyou/` (exact URL
+supplied by the user). Neither was linked from the live site itself. Added
+to every page's footer.
+
+**Preferred CTA language, from the intake form:** "Schedule appointment and
+talk to care coordinator" — used on `membership.html`'s CTAs specifically;
+kept the simpler "Book an appointment" for urgent-care/MedSpa contexts
+where "talk to a care coordinator" doesn't fit the same-day-visit framing.
+
+**Explicitly requested, not yet built — needs more from the client:**
+- **Price comparison section** ("value vs. traditional care") — intake
+  form says yes, but gave no real numbers. Built a qualitative comparison
+  (what membership includes vs. typical insurance friction) with zero
+  invented dollar figures. If the client wants numeric comparisons, needs
+  real sourced figures from them first.
+- **Women's health, HRT, etc.** — intake form asks for this as a new
+  service area not on the live site at all. No specifics given (services,
+  provider, pricing). The user explicitly chose to wait for details rather
+  than publish anything underspecified — **not on the site in any form**,
+  don't add a placeholder without checking with the user first.
+
+**Known but not yet actionable** (kept deliberately vague here — this repo
+is public, and the specifics are the client's non-public plans; ask the
+user/account team if you need exact details):
+- New clinical/support hires are in progress; no names or bios exist yet
+  for them — don't invent placeholder staff.
+- A future change in service area is under discussion, which is why the
+  footer says "serving the greater Milwaukee area" rather than naming only
+  Grafton — don't claim any new office location exists yet.
+- Laura mentioned real photos/videos of the space and team may be supplied
+  later ("if you've done any photo shoots... drop those pictures"). Until
+  then the site stays typography-led with no stock photography, per
+  `anti-generic-design` and `hallmark`'s honest-content rules.
