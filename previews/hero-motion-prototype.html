@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Motion Prototype | Oasis Healthcare</title>
+<meta name="description" content="Prototype: an on-brand animated hero background for Oasis Healthcare, built from scratch to replace the rejected stock video. Preview only.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Karla:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .previewbar { background: var(--color-ink); color: var(--color-paper); font-family: var(--font-body); font-size: 0.9375rem; padding: var(--space-2) var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; justify-content: space-between; }
+  .previewbar a { color: inherit; text-decoration: underline; font-weight: 700; }
+
+  /* Hero motion prototype: SVG pulse line (static) + a translateX sweep glow
+     + a few slow-drifting dots, all transform/opacity only. No stock assets. */
+  .hero-motion { position: relative; overflow: hidden; }
+  .hero-motion__bg { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .hero-motion__pulse { position: absolute; left: 0; right: 0; top: 62%; width: 100%; height: 7rem; opacity: 0.22; }
+  .hero-motion__pulse--2 { top: 22%; height: 5rem; opacity: 0.12; transform: scaleX(-1); }
+
+  .hero-motion__glow {
+    position: absolute;
+    top: -10%;
+    bottom: -10%;
+    width: 16rem;
+    background: linear-gradient(90deg, transparent, rgba(217,77,42,0.14) 45%, rgba(217,77,42,0.14) 55%, transparent);
+    filter: blur(2px);
+    transform: translateX(-30vw);
+    animation: hero-sweep 8s var(--ease-in-out) infinite;
+  }
+  @keyframes hero-sweep {
+    0%, 100% { transform: translateX(-30vw); }
+    50% { transform: translateX(120vw); }
+  }
+
+  .hero-motion__dot { position: absolute; border-radius: 50%; }
+  .hero-motion__dot--1 { width: 10px; height: 10px; background: var(--color-accent); opacity: 0.5; top: 18%; left: 12%; animation: hero-float-a 9s ease-in-out infinite; }
+  .hero-motion__dot--2 { width: 16px; height: 16px; background: var(--color-accent-deep); opacity: 0.3; top: 68%; left: 22%; animation: hero-float-b 11s ease-in-out infinite; }
+  .hero-motion__dot--3 { width: 8px; height: 8px; background: var(--color-slate); opacity: 0.35; top: 40%; left: 82%; animation: hero-float-a 10s ease-in-out infinite reverse; }
+  .hero-motion__dot--4 { width: 13px; height: 13px; background: var(--color-accent); opacity: 0.25; top: 78%; left: 70%; animation: hero-float-b 13s ease-in-out infinite; }
+  @keyframes hero-float-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(14px, -18px); } }
+  @keyframes hero-float-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-16px, 14px); } }
+
+  .hero-motion__content { position: relative; z-index: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-motion__glow, .hero-motion__dot--1, .hero-motion__dot--2, .hero-motion__dot--3, .hero-motion__dot--4 {
+      animation: none !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="previewbar">
+  <span>Hero motion prototype: a from-scratch animated background (pulse line, drifting dots, sweeping glow), built to replace the rejected Storyblocks stock video. Not a finished design, just a first pass to react to.</span>
+  <a href="index.html">Back to design options</a>
+</div>
+
+<nav class="nav">
+  <div class="wrap nav__row">
+    <a class="nav__logo" href="#top" aria-label="Oasis Healthcare home">
+      <img src="../images/oasis-healthcare-wordmark.png" alt="Oasis Healthcare" width="1301" height="450">
+    </a>
+    <div class="nav__links">
+      <a href="../healthcare.html">Healthcare</a>
+      <a href="../membership.html">Membership</a>
+      <a href="../medspa.html">MedSpa</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+    </div>
+    <a class="btn btn--primary nav__cta" href="../contact.html">Book an Appointment</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap hero-motion">
+    <div class="hero-motion__bg" aria-hidden="true">
+      <svg class="hero-motion__pulse" viewBox="0 0 800 100" preserveAspectRatio="none">
+        <path d="M0,50 L260,50 L285,50 L305,10 L325,90 L345,50 L370,50 L800,50" fill="none" stroke="var(--color-accent-deep)" stroke-width="2"/>
+      </svg>
+      <svg class="hero-motion__pulse hero-motion__pulse--2" viewBox="0 0 800 100" preserveAspectRatio="none">
+        <path d="M0,50 L480,50 L500,50 L515,25 L530,75 L545,50 L560,50 L800,50" fill="none" stroke="var(--color-slate)" stroke-width="2"/>
+      </svg>
+      <div class="hero-motion__glow"></div>
+      <div class="hero-motion__dot hero-motion__dot--1"></div>
+      <div class="hero-motion__dot hero-motion__dot--2"></div>
+      <div class="hero-motion__dot hero-motion__dot--3"></div>
+      <div class="hero-motion__dot hero-motion__dot--4"></div>
+    </div>
+    <div class="hero-motion__content">
+      <h1 class="h1">One practice, every way you need care.</h1>
+      <p class="lede hero__lede">Oasis Healthcare is a Grafton, Wisconsin practice built around whatever kind of care you need next: urgent and primary care for the whole family, weight loss support, membership-based specialty care for complex conditions like POTS, and a medical spa for restoration and rejuvenation. All the same practice, all under one roof at 1505 Wisconsin Ave.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="../contact.html">Book an appointment</a>
+        <a class="btn btn--outline" href="#care">See how we care for you</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint" id="care">
+    <div class="wrap" style="text-align:center;">
+      <p class="lede" style="margin-inline:auto;">This is just the hero. Everything below the fold is the real, unchanged homepage content, for context. <a href="index.html">Compare against the 3 full landing options</a> or <a href="../index.html">see the live homepage</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p style="font-size: 0.9375rem; opacity: 0.7;">Design prototype (not the live site). <a href="index.html">Back to design options</a>.</p>
+  </div>
+</footer>
+</body>
+</html>
