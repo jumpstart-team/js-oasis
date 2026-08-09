@@ -73,34 +73,29 @@
   .section--slate .btn--line { background: transparent; color: var(--color-paper); border-color: var(--color-paper); }
   .section--slate .btn--line:hover { background: var(--color-paper); color: var(--color-slate); }
 
-  .hero { padding-block: var(--space-7) var(--space-6); position: relative; overflow: hidden; }
-  @media (min-width: 48rem) { .hero { padding-block: var(--space-8) var(--space-7); } }
-  .hero::before {
+  .hero { padding-block: var(--space-8) var(--space-7); position: relative; overflow: hidden; }
+  .hero__photo-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(120deg, #9C8F87 0%, #7C7069 50%, #5A5049 100%);
+  }
+  .hero__photo-bg::after {
     content: "";
     position: absolute;
-    top: -25%;
-    right: -12%;
-    width: 50%;
-    aspect-ratio: 1;
-    background: radial-gradient(circle, rgba(60,72,90,0.10) 0%, rgba(60,72,90,0) 70%);
-    pointer-events: none;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(29,33,41,0.76) 0%, rgba(29,33,41,0.58) 42%, rgba(29,33,41,0.30) 100%);
   }
-  .hero-dots { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
-  .hero-dots__dot { position: absolute; border-radius: 50%; }
-  .hero-dots__dot--1 { width: 9px; height: 9px; background: var(--color-accent); opacity: 0.3; top: 18%; left: 10%; animation: dot-float-a 10s ease-in-out infinite; }
-  .hero-dots__dot--2 { width: 15px; height: 15px; background: var(--color-slate); opacity: 0.2; top: 70%; left: 20%; animation: dot-float-b 12s ease-in-out infinite; }
-  .hero-dots__dot--3 { width: 8px; height: 8px; background: var(--color-slate); opacity: 0.22; top: 34%; left: 46%; animation: dot-float-a 11s ease-in-out infinite reverse; }
-  .hero-dots__dot--4 { width: 12px; height: 12px; background: var(--color-accent); opacity: 0.22; top: 80%; left: 42%; animation: dot-float-b 14s ease-in-out infinite; }
-  @keyframes dot-float-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(12px, -16px); } }
-  @keyframes dot-float-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-14px, 12px); } }
-  @media (prefers-reduced-motion: reduce) { .hero-dots__dot { animation: none !important; } }
+  .hero__photo-label { position: absolute; right: var(--space-3); bottom: var(--space-3); z-index: 1; display: flex; align-items: center; gap: var(--space-1); color: var(--color-paper); opacity: 0.7; font-size: 0.8125rem; font-weight: 600; font-family: var(--font-body); }
+  .hero__photo-label svg { width: 1.125rem; height: 1.125rem; }
 
-  .hero__grid { display: grid; gap: var(--space-6); position: relative; }
-  @media (min-width: 56rem) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
-  .hero h1 { font-size: 2.5rem; line-height: 1.1; max-width: 36rem; }
+  .hero__content { position: relative; z-index: 2; max-width: 36rem; }
+  .hero h1 { font-size: 2.5rem; line-height: 1.1; max-width: 36rem; color: var(--color-paper); }
   @media (min-width: 48rem) { .hero h1 { font-size: 3.75rem; } }
-  .hero__lede { font-size: 1.1875rem; max-width: 34rem; margin-top: var(--space-3); font-family: var(--font-body); }
+  .hero__lede { font-size: 1.1875rem; max-width: 34rem; margin-top: var(--space-3); font-family: var(--font-body); color: var(--color-paper); opacity: 0.92; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
+  .hero .btn--line { background: transparent; color: var(--color-paper); border-color: var(--color-paper); }
+  .hero .btn--line:hover { background: var(--color-paper); color: var(--color-slate); }
 
   .photo-placeholder {
     display: flex;
@@ -118,7 +113,6 @@
   }
   .photo-placeholder svg { width: 2.25rem; height: 2.25rem; opacity: 0.55; }
   .photo-placeholder span { font-size: 0.9375rem; font-weight: 600; max-width: 14rem; line-height: 1.4; font-family: var(--font-body); }
-  .photo-placeholder--hero { aspect-ratio: 4 / 5; }
   .photo-placeholder--square { aspect-ratio: 1; border-radius: var(--radius-md); box-shadow: none; margin-bottom: var(--space-2); }
   .photo-placeholder--square span { font-size: 0.8125rem; }
   .section--slate .photo-placeholder { background: rgba(238,230,230,0.08); border-color: rgba(238,230,230,0.3); color: var(--color-paper); }
@@ -176,24 +170,17 @@
 
 <main id="top">
   <section class="hero wrap">
-    <div class="hero-dots" aria-hidden="true">
-      <div class="hero-dots__dot hero-dots__dot--1"></div>
-      <div class="hero-dots__dot hero-dots__dot--2"></div>
-      <div class="hero-dots__dot hero-dots__dot--3"></div>
-      <div class="hero-dots__dot hero-dots__dot--4"></div>
+    <div class="hero__photo-bg" role="img" aria-label="Photo placeholder: Laura, portrait or in-clinic"></div>
+    <div class="hero__photo-label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Photo: Laura, portrait or in-clinic</span>
     </div>
-    <div class="hero__grid">
-      <div>
-        <h1>A different way to see your provider.</h1>
-        <p class="hero__lede">Oasis Healthcare membership means one flat monthly fee, direct access to your provider, and no insurance middlemen: alongside full urgent and primary care, and a medical spa, all in Grafton, WI.</p>
-        <div class="hero__actions">
-          <a class="btn btn--slate" href="../contact.html">Schedule a conversation</a>
-          <a class="btn btn--line" href="#pricing">See membership pricing</a>
-        </div>
-      </div>
-      <div class="photo-placeholder photo-placeholder--hero" data-reveal role="img" aria-label="Photo placeholder">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Photo: Laura, portrait or in-clinic</span>
+    <div class="hero__content">
+      <h1>A different way to see your provider.</h1>
+      <p class="hero__lede">Oasis Healthcare membership means one flat monthly fee, direct access to your provider, and no insurance middlemen: alongside full urgent and primary care, and a medical spa, all in Grafton, WI.</p>
+      <div class="hero__actions">
+        <a class="btn btn--slate" href="../contact.html">Schedule a conversation</a>
+        <a class="btn btn--line" href="#pricing">See membership pricing</a>
       </div>
     </div>
   </section>
