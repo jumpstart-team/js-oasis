@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homepage Design Options | Oasis Healthcare</title>
+<meta name="description" content="Three homepage design directions for Oasis Healthcare, for comparison.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Karla:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<style>
+  .option-grid { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
+  @media (min-width: 56rem) { .option-grid { grid-template-columns: repeat(3, 1fr); } }
+  .option-card { background: var(--color-paper); border: 1px solid rgba(29,33,41,0.14); border-radius: var(--radius-md); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); }
+  .option-card__swatches { display: flex; gap: var(--space-1); margin-top: var(--space-1); }
+  .option-card__swatch { width: 1.75rem; height: 1.75rem; border-radius: 50%; border: 1px solid rgba(29,33,41,0.2); }
+  .option-card__meta { font-size: var(--text-body); color: var(--color-slate); }
+</style>
+</head>
+<body>
+<main class="wrap" style="padding-block: var(--space-6);">
+  <a href="../index.html" style="font-weight: 700;">&larr; Back to the live site</a>
+  <h1 class="h2" style="margin-top: var(--space-4);">Three homepage directions</h1>
+  <p class="lede" style="margin-top: var(--space-2); max-width: 42rem;">Three genuinely different visual directions for the Oasis Healthcare homepage, each built off a site Laura named in the intake form as inspiration &mdash; adjusted per her own notes on what each one was missing. Same real content and facts throughout (pricing, providers, hours); what changes is color, type, and structure. These are drafts for comparison, not live pages, and none of the rest of the site (healthcare/membership/medspa/about/contact) has been restyled to match any of them yet &mdash; that happens after one direction is picked.</p>
+
+  <div class="option-grid">
+    <div class="option-card">
+      <h2 class="h4">A &mdash; Energetic Modern</h2>
+      <p class="option-card__meta">Inspired by: MDRN Wellness Medical Spa<br>Her note: &ldquo;modern look, movement and imagery&rdquo; &mdash; but &ldquo;needs to be more medicine based.&rdquo;</p>
+      <p>Bold geometric type (Outfit), a dense service grid, confident scale. Credentials and evidence-based language pushed to the front to add clinical weight the reference was missing.</p>
+      <div class="option-card__swatches" aria-hidden="true">
+        <span class="option-card__swatch" style="background:#EEE6E6"></span>
+        <span class="option-card__swatch" style="background:#DCE0C6"></span>
+        <span class="option-card__swatch" style="background:#D94D2A"></span>
+        <span class="option-card__swatch" style="background:#1D2129"></span>
+      </div>
+      <a class="btn btn--primary" style="margin-top: var(--space-3); align-self: flex-start;" href="landing-energetic.html">View option A</a>
+    </div>
+
+    <div class="option-card">
+      <h2 class="h4">B &mdash; Calm &amp; Integrative</h2>
+      <p class="option-card__meta">Inspired by: Nav&#275;a Wellness<br>Her note: &ldquo;very calm, peaceful... good for medspa but needs more medicine.&rdquo;</p>
+      <p>A soft serif (Lora) with a rounded body sans, generous whitespace, minimal color. A provider quote and credentials section added deliberately, so it doesn't read as spa-only.</p>
+      <div class="option-card__swatches" aria-hidden="true">
+        <span class="option-card__swatch" style="background:#F5F1EC"></span>
+        <span class="option-card__swatch" style="background:#3C485A"></span>
+        <span class="option-card__swatch" style="background:#1D2129"></span>
+      </div>
+      <a class="btn btn--primary" style="margin-top: var(--space-3); align-self: flex-start;" href="landing-calm.html">View option B</a>
+    </div>
+
+    <div class="option-card">
+      <h2 class="h4">C &mdash; Trusted DPC</h2>
+      <p class="option-card__meta">Inspired by: Ethos Modern Medicine<br>Her note: &ldquo;they're doing what we're doing&rdquo; &mdash; but &ldquo;depth is a little weak and pictures need improvement.&rdquo;</p>
+      <p>A trust-forward serif (Source Serif) on navy and cream, real membership pricing shown right on the homepage, a numbered differentiation section. Depth built through layout and elevation, not photography.</p>
+      <div class="option-card__swatches" aria-hidden="true">
+        <span class="option-card__swatch" style="background:#EEE6E6"></span>
+        <span class="option-card__swatch" style="background:#DFCEC8"></span>
+        <span class="option-card__swatch" style="background:#3C485A"></span>
+      </div>
+      <a class="btn btn--primary" style="margin-top: var(--space-3); align-self: flex-start;" href="landing-trusted.html">View option C</a>
+    </div>
+  </div>
+
+  <div class="notice" style="margin-top: var(--space-6); max-width: 42rem;">
+    <p><strong>A note on the references:</strong> the "MDRN Wellness" match is a best guess from a garbled intake-form entry &mdash; worth a quick confirmation. None of these three options copy any reference site's actual content, photos, or exact colors/fonts &mdash; they borrow the mood and structure only, applied to Oasis Healthcare's real brand, real providers, and real pricing.</p>
+  </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Option B — Calm &amp; Integrative | Oasis Healthcare Landing Page Preview</title>
+<meta name="description" content="Homepage design option for Oasis Healthcare — calm, spacious, integrative. Preview only.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-paper: #F5F1EC;
+    --color-ink: #1D2129;
+    --color-slate: #3C485A;
+    --color-accent: #D94D2A;
+    --color-accent-deep: #B93F21;
+    --color-white: #FFFFFF;
+    --font-display: 'Lora', Georgia, serif;
+    --font-body: 'Nunito', 'Helvetica Neue', Arial, sans-serif;
+    --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem;
+    --space-5: 3rem; --space-6: 4rem; --space-7: 6rem; --space-8: 9rem;
+    --max-width: 68rem;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
+  body { margin: 0; overflow-x: clip; background: var(--color-paper); color: var(--color-ink); font-family: var(--font-body); font-size: 1rem; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  img, svg { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; }
+  ul { margin: 0; padding: 0; list-style: none; }
+  h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; margin: 0; overflow-wrap: anywhere; min-width: 0; }
+  p { margin: 0; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--color-slate); outline-offset: 3px; }
+
+  .previewbar { background: var(--color-slate); color: var(--color-paper); font-family: var(--font-body); font-size: 0.9375rem; padding: var(--space-2) var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; justify-content: space-between; }
+  .previewbar a { text-decoration: underline; font-weight: 700; }
+
+  .wrap { max-width: var(--max-width); margin-inline: auto; padding-inline: var(--space-3); }
+  @media (min-width: 48rem) { .wrap { padding-inline: var(--space-5); } }
+  .section { padding-block: var(--space-7); }
+  @media (min-width: 48rem) { .section { padding-block: var(--space-8); } }
+  .section--slate { background: var(--color-slate); color: var(--color-paper); }
+  .section--slate h1, .section--slate h2, .section--slate h3 { color: var(--color-paper); }
+  .section--white { background: var(--color-white); }
+
+  .nav { position: sticky; top: 0; z-index: 40; background: rgba(245,241,236,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .nav__row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); height: 5rem; }
+  .nav__logo img { height: 1.75rem; width: auto; }
+  .nav__links { display: none; align-items: center; gap: var(--space-5); font-size: 0.9375rem; }
+  @media (min-width: 64rem) { .nav__links { display: flex; } }
+  .nav__links a:hover { color: var(--color-slate); text-decoration: underline; text-underline-offset: 4px; }
+
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-weight: 700; font-size: 1rem; border: 1.5px solid var(--color-ink); cursor: pointer; min-height: 44px; transition: background-color 200ms ease, color 200ms ease; }
+  .btn--dark { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+  .btn--dark:hover { background: var(--color-slate); border-color: var(--color-slate); }
+  .btn--line { background: transparent; color: var(--color-ink); }
+  .btn--line:hover { background: var(--color-ink); color: var(--color-paper); }
+  .section--slate .btn--line { color: var(--color-paper); border-color: var(--color-paper); }
+  .section--slate .btn--line:hover { background: var(--color-paper); color: var(--color-slate); }
+
+  .hero { padding-block: var(--space-8) var(--space-7); text-align: center; }
+  .hero h1 { font-size: 2.5rem; line-height: 1.15; max-width: 34rem; margin-inline: auto; }
+  @media (min-width: 48rem) { .hero h1 { font-size: 3.5rem; } }
+  .hero__lede { font-size: 1.1875rem; max-width: 32rem; margin: var(--space-4) auto 0; }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); justify-content: center; }
+
+  .quote { font-family: var(--font-display); font-style: italic; font-size: 1.5rem; line-height: 1.5; max-width: 40rem; }
+  @media (min-width: 48rem) { .quote { font-size: 1.875rem; } }
+
+  .service-list { display: flex; flex-direction: column; margin-top: var(--space-6); }
+  .service-row { display: grid; grid-template-columns: 1fr; gap: var(--space-2); padding-block: var(--space-4); border-top: 1px solid rgba(29,33,41,0.15); }
+  @media (min-width: 40rem) { .service-row { grid-template-columns: 1fr 2fr; align-items: baseline; } }
+  .service-row h3 { font-size: 1.375rem; }
+  .service-row p { max-width: 34rem; }
+
+  .provider-list { display: flex; flex-direction: column; gap: var(--space-5); margin-top: var(--space-6); }
+  @media (min-width: 48rem) { .provider-list { flex-direction: row; } }
+  .provider-item { flex: 1; }
+  .provider-item__mark { width: 3rem; height: 3rem; border-radius: 50%; border: 1.5px solid var(--color-paper); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.25rem; margin-bottom: var(--space-2); }
+  .provider-item__name { font-family: var(--font-display); font-size: 1.25rem; }
+  .provider-item__role { font-size: 0.9375rem; color: var(--color-slate); margin-top: 0.15em; font-weight: 700; }
+
+  .footer { background: var(--color-paper); padding-block: var(--space-6); border-top: 1px solid rgba(29,33,41,0.15); }
+  .footer a { text-decoration: underline; }
+  .footer__bottom { margin-top: var(--space-5); font-size: 0.9375rem; opacity: 0.7; }
+</style>
+</head>
+<body>
+<div class="previewbar">
+  <span>Design option B of 3 &mdash; <strong>Calm &amp; Integrative</strong>, inspired by the calm/peaceful direction Laura flagged, with clinical credibility added.</span>
+  <a href="index.html">Compare all 3 options</a>
+</div>
+
+<nav class="nav">
+  <div class="wrap nav__row">
+    <a class="nav__logo" href="#top" aria-label="Oasis Healthcare">
+      <img src="../images/oasis-healthcare-wordmark.png" alt="Oasis Healthcare" width="1301" height="450">
+    </a>
+    <div class="nav__links">
+      <a href="../healthcare.html">Healthcare</a>
+      <a href="../membership.html">Membership</a>
+      <a href="../medspa.html">MedSpa</a>
+      <a href="../about.html">About</a>
+    </div>
+    <a class="btn btn--dark" href="../contact.html">Book a visit</a>
+  </div>
+</nav>
+
+<main id="top">
+  <section class="hero wrap">
+    <h1>Care that gives you room to breathe.</h1>
+    <p class="hero__lede">Oasis Healthcare is a Grafton practice built on evidence-based medicine and real time with your provider &mdash; urgent and primary care, membership-based specialty care, and a medical spa, all in one calm, unhurried place.</p>
+    <div class="hero__actions">
+      <a class="btn btn--dark" href="../contact.html">Book an appointment</a>
+      <a class="btn btn--line" href="#philosophy">Our approach to care</a>
+    </div>
+  </section>
+
+  <section class="section section--white" id="philosophy">
+    <div class="wrap">
+      <p class="quote">&ldquo;We are owned by clinicians. Our vision is to make healthcare accessible and affordable &mdash; care across the lifespan, from children to adults, grounded in evidence-based medicine.&rdquo;</p>
+      <p style="margin-top: var(--space-3); font-weight: 700;">Laura Mckinnis, APNP &mdash; Owner &amp; Provider</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 style="font-size: 2.25rem; max-width: 28rem;">Every way we care for you.</h2>
+      <div class="service-list">
+        <div class="service-row">
+          <h3>Healthcare</h3>
+          <p>Same-day urgent care, ongoing primary care, and medically supervised weight loss &mdash; insurance accepted, or a $99/mo membership.</p>
+        </div>
+        <div class="service-row">
+          <h3>Membership</h3>
+          <p>Flat monthly access to your provider, no insurance middlemen. Includes specialty care for POTS, headache, and related conditions with Katie Henke, NP.</p>
+        </div>
+        <div class="service-row">
+          <h3>MedSpa</h3>
+          <p>Xeomin, IV hydration, medical-grade skincare, and curated treatment packages &mdash; medicine and aesthetics, from the same trusted clinic.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--slate">
+    <div class="wrap">
+      <h2 style="font-size: 2.25rem;">Your providers.</h2>
+      <div class="provider-list">
+        <div class="provider-item">
+          <div class="provider-item__mark">L</div>
+          <div class="provider-item__name">Laura Mckinnis, APNP</div>
+          <div class="provider-item__role">Owner &amp; Provider</div>
+        </div>
+        <div class="provider-item">
+          <div class="provider-item__mark">K</div>
+          <div class="provider-item__name">Katie Henke, NP</div>
+          <div class="provider-item__role">Specialty Care Provider</div>
+        </div>
+        <div class="provider-item">
+          <div class="provider-item__mark">K</div>
+          <div class="provider-item__name">Kelly Plagemann, PA-C</div>
+          <div class="provider-item__role">Provider</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--white" style="text-align:center;">
+    <div class="wrap">
+      <h2 style="font-size: 2.5rem;">Let's find your next step.</h2>
+      <div class="hero__actions">
+        <a class="btn btn--dark" href="../contact.html">Book an appointment</a>
+        <a class="btn btn--line" href="tel:+12624218961">Call (262) 421-8961</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>Oasis Healthcare &middot; 1505 Wisconsin Ave Ste 150, Grafton, WI 53024 &middot; <a href="tel:+12624218961">(262) 421-8961</a></p>
+    <p class="footer__bottom">Design option preview &mdash; not the live site. <a href="index.html">Back to comparison</a>.</p>
+  </div>
+</footer>
+</body>
+</html>

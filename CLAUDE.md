@@ -50,6 +50,19 @@ updates" for the full reasoning):
   Milwaukee area" phrasing is deliberate and shouldn't be read as claiming
   a new office exists.
 
+## Homepage design options (`previews/`)
+
+Three alternate homepage designs for comparison, per the call transcript's
+own stated plan ("mock up a landing page... give you two or three versions
+so you can choose"). Each is inspired by one of the three reference sites
+Laura named in the intake form, adjusted per her own critique of that
+reference — not a copy of any of them (different exact colors/fonts,
+real Oasis content throughout, same facts as the live site). See
+`previews/index.html` for the comparison hub and the reasoning per option.
+These are `noindex` drafts, self-contained (their own inline styles, not
+`styles.css`/`tokens.css`), and don't affect the live site until one is
+picked and the rest of the site is restyled to match it.
+
 ## Stack
 
 Plain static HTML/CSS/JS. No framework, no build step — this is a direct
