@@ -117,6 +117,17 @@ This account has a full web-build skill bundle installed globally
 - Brand is **preserved, not reinvented** — colors, fonts, and logo are the
   practice's real values pulled from the live site (see `content-brief.md`
   § 4 and `tokens.css`), since the ask was "upgrade," not rebrand.
+- **`humanizer`** — standing rule, applies to all copy on this project, always
+  (not just when explicitly invoked). Zero em dashes anywhere: not in body
+  copy, not in `<title>` tags, meta descriptions, or `aria-label` attributes
+  (all three have tripped this before; grep for `&mdash;`, `—`, and numeric
+  entities, not just one form). Quotation marks must be genuinely verbatim
+  from a real source (the live site, the call transcript, or the intake
+  form); paraphrasing text inside quote marks, even lightly, is a fabricated
+  quote and has happened twice in this project already. When rewording
+  paraphrased (unquoted) copy for AI-tell patterns, don't touch anything
+  that traces back to a direct quote elsewhere on the site, and don't
+  introduce new factual/pricing claims that aren't sourced.
 
 ## Conventions carried over from sibling JumpStart sites
 
