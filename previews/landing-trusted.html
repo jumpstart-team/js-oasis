@@ -85,6 +85,16 @@
     background: radial-gradient(circle, rgba(60,72,90,0.10) 0%, rgba(60,72,90,0) 70%);
     pointer-events: none;
   }
+  .hero-dots { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+  .hero-dots__dot { position: absolute; border-radius: 50%; }
+  .hero-dots__dot--1 { width: 9px; height: 9px; background: var(--color-accent); opacity: 0.3; top: 18%; left: 10%; animation: dot-float-a 10s ease-in-out infinite; }
+  .hero-dots__dot--2 { width: 15px; height: 15px; background: var(--color-slate); opacity: 0.2; top: 70%; left: 20%; animation: dot-float-b 12s ease-in-out infinite; }
+  .hero-dots__dot--3 { width: 8px; height: 8px; background: var(--color-slate); opacity: 0.22; top: 34%; left: 46%; animation: dot-float-a 11s ease-in-out infinite reverse; }
+  .hero-dots__dot--4 { width: 12px; height: 12px; background: var(--color-accent); opacity: 0.22; top: 80%; left: 42%; animation: dot-float-b 14s ease-in-out infinite; }
+  @keyframes dot-float-a { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(12px, -16px); } }
+  @keyframes dot-float-b { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-14px, 12px); } }
+  @media (prefers-reduced-motion: reduce) { .hero-dots__dot { animation: none !important; } }
+
   .hero__grid { display: grid; gap: var(--space-6); position: relative; }
   @media (min-width: 56rem) { .hero__grid { grid-template-columns: 1.15fr 0.85fr; align-items: center; } }
   .hero h1 { font-size: 2.5rem; line-height: 1.1; max-width: 36rem; }
@@ -166,6 +176,12 @@
 
 <main id="top">
   <section class="hero wrap">
+    <div class="hero-dots" aria-hidden="true">
+      <div class="hero-dots__dot hero-dots__dot--1"></div>
+      <div class="hero-dots__dot hero-dots__dot--2"></div>
+      <div class="hero-dots__dot hero-dots__dot--3"></div>
+      <div class="hero-dots__dot hero-dots__dot--4"></div>
+    </div>
     <div class="hero__grid">
       <div>
         <h1>A different way to see your provider.</h1>
