@@ -46,9 +46,9 @@
   @media (min-width: 48rem) { .wrap { padding-inline: var(--space-5); } }
   .section { padding-block: var(--space-6); }
   @media (min-width: 48rem) { .section { padding-block: var(--space-7); } }
+  /* clears the hero stat card, which hangs into this section on wide screens */
+  @media (min-width: 56rem) { #services { padding-top: calc(var(--space-8) + var(--space-5)); } }
   .section--sage { background: var(--color-sage); }
-  .section--ink { background: var(--color-ink); color: var(--color-paper); }
-  .section--ink h1, .section--ink h2, .section--ink h3 { color: var(--color-paper); }
 
   /* Safe, progressive scroll reveal: base state is fully visible. JS adds
      .reveal-armed right before observing, so if JS never runs nothing is
@@ -73,33 +73,78 @@
   .btn--ink:hover { transform: translateY(-2px); }
   .btn--outline { background: transparent; color: var(--color-ink); border-color: var(--color-ink); }
   .btn--outline:hover { background: var(--color-ink); color: var(--color-paper); transform: translateY(-2px); }
-  .section--ink .btn--outline { color: var(--color-paper); border-color: var(--color-paper); }
-  .section--ink .btn--outline:hover { background: var(--color-paper); color: var(--color-ink); }
 
-  .hero { padding-block: var(--space-8) var(--space-7); position: relative; overflow: hidden; }
+  /* Hero is layered: .hero__media clips the (parallaxing) photo and holds the
+     scrim, content sits above it, and the stat card floats over the boundary
+     into the next section. .hero itself must stay overflow:visible for that
+     overhang, which is why the photo gets its own clipping wrapper. */
+  .hero { padding-block: var(--space-8) var(--space-7); position: relative; overflow: visible; }
+  .hero__media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .hero__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(90deg, rgba(29,33,41,0.76) 0%, rgba(29,33,41,0.58) 42%, rgba(29,33,41,0.30) 100%);
+  }
   .hero__photo-bg {
     position: absolute;
     inset: 0;
     z-index: 0;
     background: linear-gradient(120deg, #8B9391 0%, #6C7472 50%, #4E5654 100%);
   }
-  .hero__photo-bg::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(29,33,41,0.74) 0%, rgba(29,33,41,0.58) 42%, rgba(29,33,41,0.32) 100%);
+  /* Scroll-linked parallax on the photo only (never the scrim, which must keep
+     full coverage). Transform-only, no scroll listeners; if the browser lacks
+     scroll-driven animations the photo simply sits still. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .hero__photo-bg { animation: hero-parallax linear both; animation-timeline: view(); }
+    }
   }
-  .hero__photo-label { position: absolute; right: var(--space-3); bottom: var(--space-3); z-index: 1; display: flex; align-items: center; gap: var(--space-1); color: var(--color-paper); opacity: 0.7; font-size: 0.8125rem; font-weight: 700; }
+  @keyframes hero-parallax {
+    from { transform: translate3d(0, -4%, 0) scale(1.09); }
+    to   { transform: translate3d(0, 4%, 0) scale(1.09); }
+  }
+  /* sits bottom-left: the stat card occupies bottom-right on wide screens */
+  .hero__photo-label { position: absolute; left: var(--space-3); bottom: var(--space-3); z-index: 2; display: flex; align-items: center; gap: var(--space-1); color: var(--color-paper); opacity: 0.7; font-size: 0.8125rem; font-weight: 700; }
+  @media (min-width: 48rem) { .hero__photo-label { left: var(--space-5); } }
   .hero__photo-label svg { width: 1.125rem; height: 1.125rem; }
 
   .hero__content { position: relative; z-index: 2; max-width: 34rem; }
+  .hero__badge { display: inline-flex; align-items: center; gap: var(--space-1); background: var(--color-accent-deep); color: var(--color-white); font-family: var(--font-display); font-weight: 700; font-size: 0.9375rem; padding: 0.4rem var(--space-2) 0.4rem var(--space-2); border-radius: 999px; box-shadow: var(--shadow-raised); margin-bottom: var(--space-3); }
   .hero h1 { font-size: 2.75rem; line-height: 0.98; color: var(--color-paper); }
   @media (min-width: 48rem) { .hero h1 { font-size: 4.5rem; } }
   .hero__lede { font-size: 1.25rem; max-width: 32rem; margin-top: var(--space-3); color: var(--color-paper); opacity: 0.92; }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
   .hero .btn--outline { color: var(--color-paper); border-color: var(--color-paper); }
   .hero .btn--outline:hover { background: var(--color-paper); color: var(--color-ink); }
-  .hero .stat-row__item .label { color: var(--color-paper); opacity: 0.85; }
+
+  .hero__float {
+    position: relative;
+    z-index: 3;
+    margin-top: var(--space-6);
+    background: var(--color-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-overlay);
+    padding: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+  }
+  @media (min-width: 56rem) {
+    .hero__float {
+      position: absolute;
+      right: var(--space-5);
+      bottom: 0;
+      transform: translateY(38%);
+      margin-top: 0;
+      width: min(32rem, 52%);
+      flex-wrap: nowrap;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-5);
+    }
+    .hero__float .stat-row__item { flex: 1 1 0; }
+  }
 
   .photo-placeholder {
     display: flex;
@@ -119,20 +164,58 @@
   .photo-placeholder span { font-size: 0.9375rem; font-weight: 700; max-width: 14rem; line-height: 1.4; }
   .photo-placeholder--wide { aspect-ratio: 16 / 9; }
   .photo-placeholder--square { aspect-ratio: 1; }
-  .section--ink .photo-placeholder { background: rgba(238,230,230,0.08); border-color: rgba(238,230,230,0.3); color: var(--color-paper); }
 
   .grid { display: grid; gap: var(--space-3); }
   @media (min-width: 40rem) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (min-width: 64rem) { .grid--tiles { grid-template-columns: repeat(3, 1fr); } }
-  .tile { background: var(--color-white); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); border-radius: var(--radius-md); box-shadow: var(--shadow-raised); transition: transform 200ms ease; }
-  .tile:hover { transform: translateY(-3px); }
+
+  /* Bento: the two tiles Laura wants pushed get size (weight loss) and
+     contrast (membership) instead of every service reading as equal weight.
+     Spans are chosen so no cell is left empty at 1, 2, or 3 columns. */
+  @media (min-width: 40rem) {
+    .tile--feature, .tile--wide { grid-column: span 2; }
+  }
+  @media (min-width: 64rem) {
+    .tile--feature { grid-column: span 2; }
+    .tile--wide { grid-column: span 3; }
+  }
+
+  .tile { background: var(--color-white); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-2); border-radius: var(--radius-md); box-shadow: var(--shadow-raised); transition: transform 200ms ease, box-shadow 200ms ease; }
+  .tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-overlay); }
   .tile__num { font-family: var(--font-display); font-size: 0.9375rem; font-weight: 700; color: var(--color-accent); }
   .tile h3 { font-size: 1.375rem; }
   .tile p { font-size: 1rem; }
 
+  .tile--feature { padding: var(--space-5); justify-content: flex-end; min-height: 14rem; }
+  .tile--feature h3 { font-size: 2rem; }
+  @media (min-width: 48rem) { .tile--feature h3 { font-size: 2.5rem; } }
+  .tile--feature p { font-size: 1.125rem; max-width: 32rem; }
+
+  /* accent numeral fails contrast on ink (3.88:1), so the dark tile uses paper */
+  .tile--dark { background: var(--color-ink); color: var(--color-paper); }
+  .tile--dark h3 { color: var(--color-paper); }
+  .tile--dark .tile__num { color: var(--color-paper); opacity: 0.75; }
+
+  .tile--wide { gap: var(--space-3); }
+  .tile__lead { display: flex; flex-direction: column; gap: var(--space-1); flex: 0 0 auto; }
+  @media (min-width: 48rem) {
+    .tile--wide { flex-direction: row; align-items: center; gap: var(--space-6); padding: var(--space-5); }
+    .tile__lead { min-width: 11rem; }
+    .tile--wide p { max-width: 42rem; font-size: 1.125rem; }
+  }
+
   .stat-row { display: flex; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-5); }
-  .stat-row__item .num { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--color-accent); line-height: 1; }
+  .stat-row__item .num { font-family: var(--font-display); font-size: 3rem; font-weight: 800; color: var(--color-accent); line-height: 1; font-variant-numeric: tabular-nums; }
   .stat-row__item .label { margin-top: var(--space-1); font-weight: 700; }
+
+  /* The one saturated band. Must be accent-deep, not brand accent: white on
+     #D94D2A is only 4.16:1, white on #B93F21 is 5.53:1. */
+  .section--accent { background: var(--color-accent-deep); color: var(--color-white); }
+  .section--accent h1, .section--accent h2, .section--accent h3 { color: var(--color-white); }
+  .section--accent .btn--primary { background: var(--color-white); color: var(--color-ink); box-shadow: 0 1px 2px rgba(29,18,10,0.10), 0 8px 20px rgba(60,10,0,0.22); }
+  .section--accent .btn--primary:hover { background: var(--color-paper); }
+  .section--accent .btn--outline { color: var(--color-white); border-color: var(--color-white); }
+  .section--accent .btn--outline:hover { background: var(--color-white); color: var(--color-accent-deep); }
 
   .editorial { display: grid; gap: var(--space-5); align-items: center; }
   @media (min-width: 56rem) { .editorial { grid-template-columns: 0.9fr 1.1fr; } }
@@ -176,22 +259,25 @@
 
 <main id="top">
   <section class="hero wrap">
-    <div class="hero__photo-bg" role="img" aria-label="Photo placeholder: Laura or the team in the clinic"></div>
+    <div class="hero__media">
+      <div class="hero__photo-bg" role="img" aria-label="Photo placeholder: Laura or the team in the clinic"></div>
+    </div>
     <div class="hero__photo-label">
       <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <span>Photo: Laura or the team in the clinic</span>
     </div>
     <div class="hero__content">
+      <p class="hero__badge">Walk-ins welcome &middot; Same-day visits</p>
       <h1>Healthcare, modernized.</h1>
       <p class="hero__lede">Urgent care, primary care, membership, and MedSpa: one Grafton practice, run by clinicians, built on evidence-based care instead of guesswork. Same-day visits. Real access to your provider.</p>
       <div class="hero__actions">
         <a class="btn btn--primary" href="../contact.html">Book an appointment</a>
         <a class="btn btn--outline" href="#services">See everything we do</a>
       </div>
-      <div class="stat-row">
-        <div class="stat-row__item"><div class="num">15</div><div class="label">years ER experience, Laura Mckinnis APNP</div></div>
-        <div class="stat-row__item"><div class="num">$99</div><div class="label">/mo membership, no insurance required</div></div>
-      </div>
+    </div>
+    <div class="hero__float stat-row">
+      <div class="stat-row__item"><div class="num" data-count="15">15</div><div class="label">years ER experience, Laura Mckinnis APNP</div></div>
+      <div class="stat-row__item"><div class="num" data-count="99" data-count-prefix="$">$99</div><div class="label">/mo membership, no insurance required</div></div>
     </div>
   </section>
 
@@ -202,12 +288,15 @@
     </div>
     <div class="wrap" style="margin-top: var(--space-5);">
       <div class="grid grid--tiles" data-reveal>
-        <div class="tile"><div class="tile__num">1</div><h3>Urgent Care</h3><p>Same-day sick visits and injuries, walk-ins welcome.</p></div>
-        <div class="tile"><div class="tile__num">2</div><h3>Primary Care</h3><p>Ongoing care with a provider who knows your history.</p></div>
-        <div class="tile"><div class="tile__num">3</div><h3>Weight Loss</h3><p>Medically supervised GLP therapy: 10&ndash;20% typical loss.</p></div>
-        <div class="tile"><div class="tile__num">4</div><h3>Membership</h3><p>$99&ndash;$249/mo flat rate, no insurance middlemen.</p></div>
+        <div class="tile tile--feature"><div class="tile__num">1</div><h3>Weight Loss</h3><p>Medically supervised GLP therapy, counseling, and curated medications. Most patients see 10&ndash;20% weight loss.</p></div>
+        <div class="tile tile--dark"><div class="tile__num">2</div><h3>Membership</h3><p>$99&ndash;$249/mo flat rate, no insurance middlemen.</p></div>
+        <div class="tile"><div class="tile__num">3</div><h3>Urgent Care</h3><p>Same-day sick visits and injuries, walk-ins welcome.</p></div>
+        <div class="tile"><div class="tile__num">4</div><h3>Primary Care</h3><p>Ongoing care with a provider who knows your history.</p></div>
         <div class="tile"><div class="tile__num">5</div><h3>Specialty Care</h3><p>POTS, headache &amp; neurology with Katie Henke, NP.</p></div>
-        <div class="tile"><div class="tile__num">6</div><h3>MedSpa</h3><p>Xeomin, IV hydration, skincare &amp; treatment packages.</p></div>
+        <div class="tile tile--wide">
+          <div class="tile__lead"><div class="tile__num">6</div><h3>MedSpa</h3></div>
+          <p>Xeomin, IV hydration, skincare &amp; treatment packages.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -264,7 +353,7 @@
     </div>
   </section>
 
-  <section class="section section--ink">
+  <section class="section section--accent">
     <div class="wrap" style="text-align:center;" data-reveal>
       <h2 style="font-size: 2.75rem;">Book today. See someone this week.</h2>
       <div class="hero__actions" style="justify-content:center;">
@@ -296,6 +385,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   targets.forEach(function (el) { io.observe(el); });
+});
+
+// Count-up on the hero stats. The final value is already in the HTML, so with
+// no JS (or with reduced motion) the correct number is what renders.
+document.addEventListener('DOMContentLoaded', function () {
+  var counters = document.querySelectorAll('[data-count]');
+  if (!counters.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      var el = entry.target;
+      io.unobserve(el);
+      var target = parseFloat(el.getAttribute('data-count'));
+      var prefix = el.getAttribute('data-count-prefix') || '';
+      var final = el.textContent;
+      var duration = 900;
+      var started = null;
+      function tick(now) {
+        if (started === null) started = now;
+        var p = Math.min((now - started) / duration, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        if (p < 1) {
+          el.textContent = prefix + Math.round(target * eased);
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = final;
+        }
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(function (el) { io.observe(el); });
 });
 </script>
 </body>
