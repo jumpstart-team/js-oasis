@@ -39,6 +39,12 @@
 
     --shadow-raised: 0 1px 2px rgba(29,33,41,0.04), 0 8px 24px rgba(29,33,41,0.06);
     --shadow-overlay: 0 2px 6px rgba(29,33,41,0.06), 0 20px 44px rgba(29,33,41,0.10);
+
+    /* Bounce overshoots past its endpoint, so it only reads as spring on the
+       way IN. Leaving on the same curve looks like a glitch, so hover-out uses
+       the settle curve instead. */
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+    --ease-bounce: cubic-bezier(.34, 1.56, .64, 1);
   }
   *, *::before, *::after { box-sizing: border-box; }
   html { overflow-x: clip; -webkit-text-size-adjust: 100%; }
@@ -72,14 +78,19 @@
 
   /* Progressive reveal: visible by default, JS arms the hidden state only just
      before observing, so nothing can be permanently invisible if JS fails. */
-  [data-reveal].reveal-armed { opacity: 0; transform: translateY(18px); transition: opacity 600ms cubic-bezier(.16,1,.3,1), transform 600ms cubic-bezier(.16,1,.3,1); transition-delay: var(--reveal-delay, 0ms); }
-  [data-reveal].reveal-armed.is-visible { opacity: 1; transform: translateY(0); }
+  /* Reveal animates `translate`, NOT `transform`. These are independent
+     properties that compose, so the reveal cannot win a specificity fight
+     against `.care:hover { transform: ... }`. Using transform for both meant
+     [data-reveal].reveal-armed.is-visible (3 selectors) beat .care:hover (2)
+     and silently cancelled every card's hover lift. */
+  [data-reveal].reveal-armed { opacity: 0; translate: 0 18px; transition: opacity 600ms var(--ease-out), translate 600ms var(--ease-out); transition-delay: var(--reveal-delay, 0ms); }
+  [data-reveal].reveal-armed.is-visible { opacity: 1; translate: 0 0; }
   /* Items in a row arrive together otherwise; a small per-item offset reads as
      composed rather than a single block fading in. */
   .care-grid > *:nth-child(2), .pay-grid > *:nth-child(2), .team > *:nth-child(2) { --reveal-delay: 90ms; }
   .care-grid > *:nth-child(3), .pay-grid > *:nth-child(3), .team > *:nth-child(3) { --reveal-delay: 180ms; }
   .care-grid > *:nth-child(4), .pay-grid > *:nth-child(4) { --reveal-delay: 270ms; }
-  @media (prefers-reduced-motion: reduce) { [data-reveal].reveal-armed { opacity: 1; transform: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { [data-reveal].reveal-armed { opacity: 1; translate: none; transition: none; } }
 
   .nav { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .nav__row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); height: 5rem; }
@@ -88,9 +99,9 @@
   @media (min-width: 64rem) { .nav__links { display: flex; } }
   .nav__links a:hover { color: var(--color-accent-deep); }
 
-  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-weight: 600; font-size: 1rem; border-radius: 999px; border: 1.5px solid transparent; cursor: pointer; min-height: 46px; transition: transform 180ms ease; }
-  .btn:hover { transform: translateY(-2px); }
-  .btn:active { transform: translateY(0); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: var(--space-2) var(--space-4); font-family: var(--font-body); font-weight: 600; font-size: 1rem; border-radius: 999px; border: 1.5px solid transparent; cursor: pointer; min-height: 46px; transition: transform 240ms var(--ease-out); }
+  .btn:hover { transform: translateY(-4px); transition: transform 380ms var(--ease-bounce); }
+  .btn:active { transform: translateY(-1px); transition-duration: 90ms; }
   .btn--primary { background: var(--color-accent-deep); color: var(--color-white); box-shadow: var(--shadow-raised); }
   .btn--primary:hover { background: var(--color-accent); }
   .btn--line { background: transparent; color: var(--color-ink); border-color: rgba(29,33,41,0.28); }
@@ -182,8 +193,8 @@
      that is itself the link: redundant affordance, and four near-identical
      strings in a row. The card's heading already names the destination. */
   .care__more { margin-top: auto; padding-top: var(--space-3); color: var(--color-accent-deep); display: flex; align-items: center; }
-  .care__more svg { width: 1.375rem; height: 1.375rem; transition: transform 220ms cubic-bezier(.16,1,.3,1); }
-  .care:hover .care__more svg { transform: translateX(6px); }
+  .care__more svg { width: 1.375rem; height: 1.375rem; transition: transform 240ms var(--ease-out); }
+  .care:hover .care__more svg { transform: translateX(7px); transition: transform 420ms var(--ease-bounce); }
   @media (prefers-reduced-motion: reduce) { .care__more svg { transition: none; } .care:hover .care__more svg { transform: none; } }
 
   /* ---------- Access pathways ---------- */
@@ -205,7 +216,7 @@
      The tint and the halo live on pseudo-elements whose OPACITY is animated,
      rather than transitioning background-color / box-shadow directly, so the
      only animated properties anywhere are transform and opacity. */
-  .care, .pay { position: relative; isolation: isolate; transition: transform 220ms var(--ease-out, cubic-bezier(.16,1,.3,1)); }
+  .care, .pay { position: relative; isolation: isolate; transition: transform 280ms var(--ease-out); }
   .care::before, .pay::before {
     content: ""; position: absolute; inset: 0; border-radius: inherit;
     background: rgba(217,77,42,0.05);
@@ -217,17 +228,20 @@
     box-shadow:
       0 0 0 1.5px rgba(185,63,33,0.45),
       0 0 0 6px rgba(217,77,42,0.10),
-      0 18px 40px rgba(29,33,41,0.13);
-    opacity: 0; transition: opacity 220ms ease;
+      0 28px 56px rgba(29,33,41,0.17);
+    opacity: 0; transition: opacity 240ms ease;
     pointer-events: none;
   }
-  .care:hover, .pay:hover { transform: translateY(-4px); }
+  .care:hover, .pay:hover {
+    transform: translateY(-10px) scale(1.014);
+    transition: transform 420ms var(--ease-bounce);
+  }
   .care:hover::before, .pay:hover::before,
   .care:hover::after, .pay:hover::after { opacity: 1; }
   .care:focus-visible::after, .pay:focus-visible::after { opacity: 1; }
   @media (prefers-reduced-motion: reduce) {
-    .care, .pay { transition: none; }
-    .care:hover, .pay:hover { transform: none; }
+    .care, .pay, .btn { transition: none; }
+    .care:hover, .pay:hover, .btn:hover, .btn:active { transform: none; transition: none; }
   }
   .pay h3 { font-size: 1.375rem; }
   .pay p { font-size: 0.9375rem; color: var(--color-slate); }
