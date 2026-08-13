@@ -84,11 +84,35 @@
   .section--slate .btn--line { color: var(--color-white); border-color: rgba(255,255,255,0.6); }
   .section--slate .btn--line:hover { background: var(--color-white); color: var(--color-slate); }
 
-  /* ---------- Hero: light and open, photo sits beside the words ---------- */
-  .hero { padding-block: var(--space-7) var(--space-6); }
-  @media (min-width: 48rem) { .hero { padding-block: var(--space-8) var(--space-7); } }
-  .hero__grid { display: grid; gap: var(--space-6); align-items: center; }
-  @media (min-width: 56rem) { .hero__grid { grid-template-columns: 1fr 1fr; gap: var(--space-7); } }
+  /* ---------- Hero: photo fills the whole hero, kept bright by a LIGHT scrim
+     with dark text on top (rather than the usual dark scrim + white text,
+     which would make the hero the heaviest thing on an intentionally light
+     page). Scrim strength is set by contrast, not taste: over a worst-case
+     pure-black photo the text zone gives ink 14.16:1 and accent-deep 4.85:1.
+     Dropping it to 0.86 would put accent-deep at 4.00:1 and fail AA. ---------- */
+  .hero { position: relative; overflow: hidden; padding-block: var(--space-7) var(--space-6); display: flex; align-items: center; }
+  @media (min-width: 48rem) { .hero { padding-block: var(--space-8) var(--space-7); min-height: 30rem; } }
+  .hero__media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+  .hero__photo { position: absolute; inset: 0; background: linear-gradient(120deg, #8B9391 0%, #6C7472 50%, #4E5654 100%); }
+  .hero__media::after { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,0.93); }
+  @media (min-width: 56rem) {
+    .hero__media::after {
+      background: linear-gradient(90deg,
+        rgba(255,255,255,0.95) 0%,
+        rgba(255,255,255,0.94) 44%,
+        rgba(255,255,255,0.62) 78%,
+        rgba(255,255,255,0.42) 100%);
+    }
+  }
+  .hero__photo-label {
+    position: absolute; z-index: 2; right: var(--space-3); bottom: var(--space-3);
+    display: flex; align-items: center; gap: var(--space-1);
+    background: rgba(255,255,255,0.92); border-radius: 999px;
+    padding: 0.35rem 0.7rem;
+    color: var(--color-slate); font-size: 0.8125rem; font-weight: 600;
+  }
+  .hero__photo-label svg { width: 1rem; height: 1rem; flex: 0 0 auto; }
+  .hero__content { position: relative; z-index: 2; max-width: 38rem; }
   .hero h1 { font-size: 2.75rem; }
   @media (min-width: 48rem) { .hero h1 { font-size: 4rem; } }
   .hero__lede { font-size: 1.1875rem; max-width: 32rem; margin-top: var(--space-3); color: var(--color-slate); }
@@ -107,7 +131,6 @@
   }
   .ph svg { width: 2rem; height: 2rem; opacity: 0.5; }
   .ph span { font-size: 0.9375rem; font-weight: 600; max-width: 15rem; line-height: 1.4; }
-  .ph--hero { aspect-ratio: 4 / 3; box-shadow: var(--shadow-overlay); }
   .ph--card { aspect-ratio: 3 / 2; border-radius: var(--radius-md); padding: var(--space-3); }
   .ph--card span { font-size: 0.8125rem; }
   .ph--person { aspect-ratio: 1; border-radius: 50%; width: 6.5rem; margin-inline: auto; padding: var(--space-2); }
@@ -219,9 +242,16 @@
 </nav>
 
 <main id="top">
-  <section class="hero wrap">
-    <div class="hero__grid">
-      <div>
+  <section class="hero">
+    <div class="hero__media">
+      <div class="hero__photo" role="img" aria-label="Photo placeholder: Laura or the team with a patient, bright clinic setting"></div>
+    </div>
+    <div class="hero__photo-label">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Photo: Laura or the team with a patient</span>
+    </div>
+    <div class="wrap">
+      <div class="hero__content">
         <h1>From illness to wellness.</h1>
         <p class="hero__lede">Convenient, cost-effective care in Grafton: urgent and primary care, prevention, and aesthetics, with insurance, membership, or flat cash pricing.</p>
         <div class="hero__actions">
@@ -233,10 +263,6 @@
           <span>Same-day visits</span>
           <span>Insurance accepted</span>
         </div>
-      </div>
-      <div class="ph ph--hero" data-reveal role="img" aria-label="Photo placeholder: Laura or the team with a patient, bright clinic setting">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="11" r="2" stroke="currentColor" stroke-width="1.6"/><path d="M3 16l4.5-4 3 2.5L15 10l6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span>Photo: Laura or the team with a patient, bright clinic setting</span>
       </div>
     </div>
   </section>
