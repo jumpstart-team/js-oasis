@@ -31,7 +31,7 @@
 
     --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem;
     --space-5: 3rem; --space-6: 4rem; --space-7: 6rem; --space-8: 8rem;
-    --max-width: 72rem;
+    --max-width: 80rem;
 
     --radius-sm: 6px;
     --radius-md: 14px;
@@ -46,8 +46,17 @@
   img, svg { display: block; max-width: 100%; height: auto; }
   a { color: inherit; text-decoration: none; }
   ul { margin: 0; padding: 0; list-style: none; }
-  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; margin: 0; overflow-wrap: anywhere; min-width: 0; line-height: 1.2; }
-  p { margin: 0; }
+  /* Display type: large serif needs negative tracking and tighter leading or it
+     reads like a document rather than a brand. text-wrap:balance kills orphans
+     in headings, pretty improves the rag on body copy. */
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 500; margin: 0; overflow-wrap: anywhere; min-width: 0; line-height: 1.15; letter-spacing: -0.015em; text-wrap: balance; }
+  h1 { line-height: 1.04; letter-spacing: -0.028em; }
+  p { margin: 0; text-wrap: pretty; }
+
+  /* Anchor targets have to clear the sticky nav when jumped to, otherwise the
+     four care buttons land with their heading hidden behind the header. */
+  [id] { scroll-margin-top: 7rem; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
   a:focus-visible, button:focus-visible { outline: 2px solid var(--color-accent-deep); outline-offset: 3px; }
 
   .previewbar { background: var(--color-ink); color: var(--color-white); font-size: 0.9375rem; padding: var(--space-2) var(--space-3); display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; justify-content: space-between; }
@@ -63,8 +72,13 @@
 
   /* Progressive reveal: visible by default, JS arms the hidden state only just
      before observing, so nothing can be permanently invisible if JS fails. */
-  [data-reveal].reveal-armed { opacity: 0; transform: translateY(18px); transition: opacity 600ms cubic-bezier(.16,1,.3,1), transform 600ms cubic-bezier(.16,1,.3,1); }
+  [data-reveal].reveal-armed { opacity: 0; transform: translateY(18px); transition: opacity 600ms cubic-bezier(.16,1,.3,1), transform 600ms cubic-bezier(.16,1,.3,1); transition-delay: var(--reveal-delay, 0ms); }
   [data-reveal].reveal-armed.is-visible { opacity: 1; transform: translateY(0); }
+  /* Items in a row arrive together otherwise; a small per-item offset reads as
+     composed rather than a single block fading in. */
+  .care-grid > *:nth-child(2), .pay-grid > *:nth-child(2), .team > *:nth-child(2) { --reveal-delay: 90ms; }
+  .care-grid > *:nth-child(3), .pay-grid > *:nth-child(3), .team > *:nth-child(3) { --reveal-delay: 180ms; }
+  .care-grid > *:nth-child(4), .pay-grid > *:nth-child(4) { --reveal-delay: 270ms; }
   @media (prefers-reduced-motion: reduce) { [data-reveal].reveal-armed { opacity: 1; transform: none; transition: none; } }
 
   .nav { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -112,10 +126,11 @@
     color: var(--color-slate); font-size: 0.8125rem; font-weight: 600;
   }
   .hero__photo-label svg { width: 1rem; height: 1rem; flex: 0 0 auto; }
-  .hero__content { position: relative; z-index: 2; max-width: 38rem; }
+  .hero__content { position: relative; z-index: 2; max-width: 46rem; }
   .hero h1 { font-size: 2.75rem; }
-  @media (min-width: 48rem) { .hero h1 { font-size: 4rem; } }
-  .hero__lede { font-size: 1.1875rem; max-width: 32rem; margin-top: var(--space-3); color: var(--color-slate); }
+  @media (min-width: 48rem) { .hero h1 { font-size: 4.5rem; } }
+  @media (min-width: 72rem) { .hero h1 { font-size: 5.25rem; } }
+  .hero__lede { font-size: 1.1875rem; max-width: 36rem; margin-top: var(--space-4); color: var(--color-slate); }
   .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
   .hero__points { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-top: var(--space-5); font-size: 0.9375rem; font-weight: 600; color: var(--color-accent-deep); }
 
@@ -133,12 +148,20 @@
   .ph span { font-size: 0.9375rem; font-weight: 600; max-width: 15rem; line-height: 1.4; }
   .ph--card { aspect-ratio: 3 / 2; border-radius: var(--radius-md); padding: var(--space-3); }
   .ph--card span { font-size: 0.8125rem; }
-  .ph--person { aspect-ratio: 1; border-radius: 50%; width: 6.5rem; margin-inline: auto; padding: var(--space-2); }
+  .ph--person { aspect-ratio: 1; border-radius: 50%; width: 9rem; margin-inline: auto; padding: var(--space-2); }
   .ph--person span { font-size: 0.75rem; }
 
   /* ---------- Care spectrum: 4 categories, illness to wellness ---------- */
-  .lede-block { max-width: 36rem; }
-  .lede-block p { margin-top: var(--space-2); font-size: 1.0625rem; color: var(--color-slate); }
+  /* Editorial two-column section header: heading left, supporting line right,
+     baseline-aligned. Stops each section opening as another narrow centred
+     block with dead space to its right. */
+  .section-head { display: grid; gap: var(--space-3); }
+  @media (min-width: 56rem) {
+    .section-head { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: var(--space-7); align-items: end; }
+  }
+  .section-head h2 { font-size: 2.25rem; }
+  @media (min-width: 48rem) { .section-head h2 { font-size: 2.875rem; } }
+  .section-head p { font-size: 1.0625rem; color: var(--color-slate); max-width: 34rem; }
 
   .care-grid { display: grid; gap: var(--space-3); margin-top: var(--space-6); }
   @media (min-width: 40rem) { .care-grid { grid-template-columns: repeat(2, 1fr); } }
@@ -155,12 +178,20 @@
   .care__body { padding: 0 var(--space-2) var(--space-2); display: flex; flex-direction: column; gap: var(--space-1); flex: 1; }
   .care h3 { font-size: 1.25rem; }
   .care p { font-size: 0.9375rem; color: var(--color-slate); }
-  .care__more { margin-top: auto; padding-top: var(--space-2); font-weight: 600; font-size: 0.9375rem; color: var(--color-accent-deep); }
-  .care:hover .care__more { text-decoration: underline; }
+  /* Was a repeated "See urgent care" / "See primary care" label inside a card
+     that is itself the link: redundant affordance, and four near-identical
+     strings in a row. The card's heading already names the destination. */
+  .care__more { margin-top: auto; padding-top: var(--space-3); color: var(--color-accent-deep); display: flex; align-items: center; }
+  .care__more svg { width: 1.375rem; height: 1.375rem; transition: transform 220ms cubic-bezier(.16,1,.3,1); }
+  .care:hover .care__more svg { transform: translateX(6px); }
+  @media (prefers-reduced-motion: reduce) { .care__more svg { transition: none; } .care:hover .care__more svg { transform: none; } }
 
   /* ---------- Access pathways ---------- */
   .pay-grid { display: grid; gap: var(--space-3); margin-top: var(--space-6); }
   @media (min-width: 40rem) { .pay-grid { grid-template-columns: repeat(2, 1fr); } }
+  /* Four parallel options compare better in one row than stacked 2x2, and it
+     uses the full width instead of leaving a column of air. */
+  @media (min-width: 72rem) { .pay-grid { grid-template-columns: repeat(4, 1fr); gap: var(--space-4); } }
   .pay {
     background: var(--color-white);
     border: 1px solid rgba(29,33,41,0.08);
@@ -200,7 +231,9 @@
   }
   .pay h3 { font-size: 1.375rem; }
   .pay p { font-size: 0.9375rem; color: var(--color-slate); }
-  .pay__price { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-accent-deep); line-height: 1.1; }
+  /* Pricing is the trust moment on a DPC page: tabular figures so the numbers
+     align across cards, tighter tracking so they read as one unit. */
+  .pay__price { font-family: var(--font-display); font-size: 2rem; font-weight: 600; color: var(--color-accent-deep); line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .pay__price span { font-family: var(--font-body); font-size: 1rem; font-weight: 500; color: var(--color-slate); }
   .pay__note { font-size: 0.875rem; color: var(--color-slate); }
   .pay__link { margin-top: auto; padding-top: var(--space-2); font-weight: 600; font-size: 0.9375rem; color: var(--color-accent-deep); text-decoration: underline; }
@@ -211,7 +244,7 @@
   .team { display: grid; gap: var(--space-5); margin-top: var(--space-6); }
   @media (min-width: 48rem) { .team { grid-template-columns: repeat(3, 1fr); } }
   .team__item { text-align: center; }
-  .team__name { font-family: var(--font-display); font-size: 1.125rem; margin-top: var(--space-2); }
+  .team__name { font-family: var(--font-display); font-size: 1.375rem; margin-top: var(--space-3); }
   .team__role { font-size: 0.9375rem; color: var(--color-slate); }
 
   .footer { background: var(--color-ink); color: var(--color-white); padding-block: var(--space-6); }
@@ -269,13 +302,13 @@
 
   <section class="section section--cream" id="care">
     <div class="wrap">
-      <div class="lede-block" data-reveal>
-        <h2 style="font-size: 2.25rem;">How we care for you</h2>
+      <div class="section-head" data-reveal>
+        <h2>How we care for you</h2>
         <p>Care across the whole spectrum, from illness to wellness.</p>
       </div>
-      <div class="care-grid" data-reveal>
+      <div class="care-grid">
 
-        <a class="care" href="../healthcare.html#urgent">
+        <a class="care" data-reveal href="../healthcare.html#urgent">
           <div class="ph ph--card" role="img" aria-label="Photo placeholder: urgent care visit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M12 9v6M9 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <span>Photo: urgent care</span>
@@ -283,11 +316,11 @@
           <div class="care__body">
             <h3>Urgent Care</h3>
             <p>Injury and illness, seen the same day. Walk-ins welcome.</p>
-            <span class="care__more">See urgent care</span>
+            <span class="care__more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </a>
 
-        <a class="care" href="../healthcare.html#primary">
+        <a class="care" data-reveal href="../healthcare.html#primary">
           <div class="ph ph--card" role="img" aria-label="Photo placeholder: primary care visit">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 13h3l2-5 3 10 2-6 1.5 3H20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span>Photo: primary care</span>
@@ -295,11 +328,11 @@
           <div class="care__body">
             <h3>Primary Care</h3>
             <p>Ongoing care and disease management with a provider who knows your history.</p>
-            <span class="care__more">See primary care</span>
+            <span class="care__more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </a>
 
-        <a class="care" href="../healthcare.html#weight-loss">
+        <a class="care" data-reveal href="../healthcare.html#weight-loss">
           <div class="ph ph--card" role="img" aria-label="Photo placeholder: weight loss and prevention">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 21s-7-4.5-7-9.5A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7 3.5C19 16.5 12 21 12 21z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
             <span>Photo: weight loss and prevention</span>
@@ -307,11 +340,11 @@
           <div class="care__body">
             <h3>Health Maintenance &amp; Prevention</h3>
             <p>Medically supervised weight loss, physicals, and preventive care.</p>
-            <span class="care__more">See weight loss support</span>
+            <span class="care__more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </a>
 
-        <a class="care" href="../medspa.html">
+        <a class="care" data-reveal href="../medspa.html">
           <div class="ph ph--card" role="img" aria-label="Photo placeholder: aesthetics and wellness">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4l1.8 4.6L18.5 10l-4.7 1.4L12 16l-1.8-4.6L5.5 10l4.7-1.4L12 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
             <span>Photo: aesthetics and wellness</span>
@@ -319,7 +352,7 @@
           <div class="care__body">
             <h3>Aesthetics &amp; Wellness</h3>
             <p>Xeomin, IV hydration, skincare, and treatment packages at Oasis MedSpa.</p>
-            <span class="care__more">See MedSpa</span>
+            <span class="care__more" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 12h13M13 6l6 6-6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
           </div>
         </a>
 
@@ -329,34 +362,34 @@
 
   <section class="section" id="access">
     <div class="wrap">
-      <div class="lede-block" data-reveal>
-        <h2 style="font-size: 2.25rem;">Accessing care is simple and affordable</h2>
+      <div class="section-head" data-reveal>
+        <h2>Accessing care is simple and affordable</h2>
         <p>Four ways to be seen. Pick whichever fits your situation.</p>
       </div>
 
-      <div class="pay-grid" data-reveal>
-        <div class="pay">
+      <div class="pay-grid">
+        <div class="pay" data-reveal>
           <h3>Membership</h3>
           <div class="pay__price">$99<span>/mo individual</span></div>
-          <p>Direct Primary Care: you pay the clinic directly, so care is not rationed by an insurance company. One flat fee, extended visits, and direct access to your provider.</p>
+          <p>Direct Primary Care: you pay the clinic directly. One flat fee, extended visits, and direct access to your provider.</p>
           <p class="pay__note">$249/mo family max &middot; $149/mo specialty care</p>
           <a class="pay__link" href="../membership.html">How membership works</a>
         </div>
 
-        <div class="pay">
+        <div class="pay" data-reveal>
           <h3>Commercial insurance</h3>
           <p>We accept a full panel of insurance for everyday visits, including Aetna, BCBS, Cigna, Humana, Medicare, UHC/UMR, Medicaid, and Tricare.</p>
           <a class="pay__link" href="../healthcare.html#pricing">See accepted insurance</a>
         </div>
 
-        <div class="pay">
+        <div class="pay" data-reveal>
           <h3>Discounted cash rate</h3>
           <div class="pay__price">$149&ndash;$349<span>/visit</span></div>
           <p class="pay__note">Cash-pay visits only. Insurance rates vary by plan and coverage.</p>
           <a class="pay__link" href="../healthcare.html#pricing">See cash pricing</a>
         </div>
 
-        <div class="pay pay--soft">
+        <div class="pay pay--soft" data-reveal>
           <h3>Employer-sponsored plans</h3>
           <p>Interested in offering membership to your employees? We would like to hear from you.</p>
           <a class="pay__link" href="../contact.html">Ask about employer plans</a>
@@ -371,12 +404,12 @@
 
   <section class="section section--cream">
     <div class="wrap">
-      <div class="lede-block" data-reveal>
-        <h2 style="font-size: 2rem;">Owned by clinicians</h2>
+      <div class="section-head" data-reveal>
+        <h2>Owned by clinicians</h2>
         <p>Laura opened Oasis in 2020 after 15 years in emergency medicine.</p>
       </div>
-      <div class="team" data-reveal>
-        <div class="team__item">
+      <div class="team">
+        <div class="team__item" data-reveal>
           <div class="ph ph--person" role="img" aria-label="Photo placeholder: Laura Mckinnis">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <span>Laura</span>
@@ -384,7 +417,7 @@
           <div class="team__name">Laura Mckinnis, APNP</div>
           <div class="team__role">Owner &amp; Provider</div>
         </div>
-        <div class="team__item">
+        <div class="team__item" data-reveal>
           <div class="ph ph--person" role="img" aria-label="Photo placeholder: Katie Henke">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <span>Katie</span>
@@ -392,7 +425,7 @@
           <div class="team__name">Katie Henke, NP</div>
           <div class="team__role">Specialty Care Provider</div>
         </div>
-        <div class="team__item">
+        <div class="team__item" data-reveal>
           <div class="ph ph--person" role="img" aria-label="Photo placeholder: Kelly Plagemann">
             <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="8.5" r="3.5" stroke="currentColor" stroke-width="1.6"/><path d="M4.5 20c1.5-4 4.5-6 7.5-6s6 2 7.5 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             <span>Kelly</span>
