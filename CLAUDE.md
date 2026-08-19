@@ -61,11 +61,14 @@ The flow they asked for, and what the pages implement:
 
 1. Hero on **"from illness to wellness"** (their own live-site tagline, not
    invented) framed around convenient, cost-effective care.
-2. **"How we care for you"**, four categories in illness→wellness order:
-   urgent care → primary care and disease management → health maintenance and
-   prevention → aesthetics and wellness. The first three deep-link to sections
-   on `healthcare.html` (`#urgent`, `#primary`, `#prevention`); the fourth goes
-   to `medspa.html`. No new pages, per their answer.
+2. **"How we care for you"**, now **three** services in illness→wellness order,
+   each with its own page: Healthcare (urgent care plus primary care and
+   disease management) → Health Maintenance and Prevention (weight loss,
+   physicals, screening) → Aesthetics and Wellness (MedSpa). This replaced an
+   earlier four-category version that deep-linked into sections of
+   `healthcare.html`; the client asked for three services and three menu
+   pages, so `health-maintenance.html` was split out and the `#prevention`
+   anchor retired.
 3. **"Accessing care is simple and affordable"**: membership/DPC, commercial
    insurance, discounted cash rate, employer-sponsored plans.
 
@@ -78,8 +81,13 @@ Judgement calls made where their notes were silent, all easy to reverse:
   with no program details, pricing, or claim that a program already exists.
   Per their answer, it is real but early.
 - **Membership leads, DPC is defined inside it**, rather than renaming the nav.
+- **Membership stays in the nav** although the client named only the three
+  service pages. It is a real page with pricing that the intake form explicitly
+  asked for, so removing it from navigation would bury the conversion path.
 - A compressed **providers strip** was kept although their flow omitted a team
   section, because clinician-ownership is the strongest trust signal available.
+  It features Laura and Katie per the client's request; Kelly Plagemann is a
+  real provider and remains on `about.html`, which is the full team page.
 
 `previews/` holds the three original A/B/C options, frozen as reference only.
 
@@ -112,8 +120,8 @@ static bundle. Structure mirrors what those sibling repos export, authored
 directly instead of generated:
 
 ```
-index.html, healthcare.html, membership.html, medspa.html,
-about.html, contact.html
+index.html, healthcare.html, health-maintenance.html, medspa.html,
+membership.html, about.html, contact.html
 tokens.css   (design tokens: real brand colors, type scale, motion)
 styles.css   (@imports tokens.css; every component lives here)
 site.js      (mobile nav, FAQ accordion, scroll reveal)
