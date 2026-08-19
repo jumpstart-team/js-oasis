@@ -4,16 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hours, Location &amp; Booking | Oasis Healthcare in Grafton, WI</title>
-<meta name="description" content="Visit Oasis Healthcare at 1505 Wisconsin Ave Ste 150, Grafton, WI. Hours, phone, and online booking for healthcare, membership specialty care, and MedSpa.">
+<meta name="description" content="Visit Oasis Healthcare at 1505 Wisconsin Ave Ste 150, Grafton, WI. Hours, phone, directions, and online booking for healthcare, membership, and MedSpa.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="images/favicon-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="images/favicon-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&family=Karla:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <nav class="nav">
   <div class="wrap nav__row">
     <a class="nav__logo" href="index.html" aria-label="Oasis Healthcare home">
@@ -26,7 +27,7 @@
       <a href="about.html">About</a>
       <a href="contact.html" aria-current="page">Contact</a>
     </div>
-    <a class="btn btn--primary nav__cta" href="#booking">Book an Appointment</a>
+    <a class="btn btn--primary nav__cta" href="https://practice.kareo.com/oasishealthcare">Book an appointment</a>
     <button class="nav__toggle" data-mobile-toggle aria-label="Toggle menu" aria-expanded="false" type="button">
       <svg class="icon-open" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
       <svg class="icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M4 4L18 18M18 4L4 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
@@ -38,80 +39,104 @@
     <a href="medspa.html">MedSpa</a>
     <a href="about.html">About</a>
     <a href="contact.html" aria-current="page">Contact</a>
-    <a class="btn btn--primary" href="#booking">Book an Appointment</a>
+    <a class="btn btn--primary" href="https://practice.kareo.com/oasishealthcare">Book an appointment</a>
   </div>
 </nav>
-
-<main>
+<main id="main">
   <section class="hero wrap">
-    <h1 class="h1">Visit us in Grafton.</h1>
-    <p class="lede hero__lede">One location, every way to book. Walk-ins are welcome for everyday healthcare visits; membership specialty care and MedSpa see patients by appointment.</p>
-  </section>
-
-  <section class="section">
-    <div class="wrap grid grid--2">
-      <div>
-        <h2 class="h3">Location</h2>
-        <p style="margin-top: var(--space-2);">1505 Wisconsin Ave Ste 150<br>Grafton, WI 53024</p>
-        <p style="margin-top: var(--space-3);"><a href="tel:+12624218961">(262) 421-8961</a><br><a href="mailto:info@oasishealthcare.net">info@oasishealthcare.net</a></p>
-        <a class="btn btn--outline" style="margin-top: var(--space-4);" href="https://www.google.com/maps/search/?api=1&amp;query=1505+Wisconsin+Ave+Ste+150+Grafton+WI+53024" target="_blank" rel="noopener">Get directions</a>
-      </div>
-      <div>
-        <h2 class="h3">Hours</h2>
-        <div style="margin-top: var(--space-3);">
-          <h3 class="h4">Oasis Healthcare</h3>
-          <p class="muted">Walk-ins welcome</p>
-          <div class="hours-table" style="margin-top: var(--space-2);">
-            <div class="hours-table__row"><span>Monday</span><span>8am&ndash;6pm</span></div>
-            <div class="hours-table__row"><span>Tuesday</span><span>8am&ndash;4pm</span></div>
-            <div class="hours-table__row"><span>Thursday</span><span>8am&ndash;4pm</span></div>
-            <div class="hours-table__row"><span>Saturday</span><span>8am&ndash;12pm (appointment recommended)</span></div>
-          </div>
-        </div>
-        <div style="margin-top: var(--space-4);">
-          <h3 class="h4">Membership &amp; specialty care</h3>
-          <p class="muted">By appointment only</p>
-          <div class="hours-table" style="margin-top: var(--space-2);">
-            <div class="hours-table__row"><span>Monday</span><span>12pm&ndash;3pm</span></div>
-            <div class="hours-table__row"><span>Friday</span><span>8am&ndash;2pm</span></div>
-          </div>
-        </div>
-        <div style="margin-top: var(--space-4);">
-          <h3 class="h4">Oasis MedSpa</h3>
-          <p class="muted">By appointment only</p>
-        </div>
+    <div class="hero__content">
+      <h1>Visit us in Grafton.</h1>
+      <p class="hero__lede">One location, several ways to book. Walk-ins are welcome for everyday healthcare visits. Membership, specialty care, and MedSpa are seen by appointment.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="https://practice.kareo.com/oasishealthcare">Book an appointment</a>
+        <a class="btn btn--line" href="tel:+12624218961">Call (262) 421-8961</a>
       </div>
     </div>
   </section>
 
-  <section class="section section--tint" id="booking">
+  <section class="section section--cream">
     <div class="wrap">
-      <h2 class="h3">Book an appointment</h2>
-      <div class="grid grid--3" style="margin-top: var(--space-5);">
-        <div class="card">
-          <h3 class="card__title h4">Healthcare</h3>
-          <p class="muted">Urgent care, primary care &amp; weight loss with Laura Mckinnis, APNP</p>
-          <a class="btn btn--primary" style="margin-top:auto;" href="https://www.tebra.com/care/provider/laura-mckinnis-np-1497931943">Book with Laura</a>
+      <div class="section-head" data-reveal>
+        <h2>Hours and location</h2>
+        <p>1505 Wisconsin Ave Ste 150, Grafton, WI 53024.</p>
+      </div>
+      <div class="grid-3 stack-lg">
+        <div class="card" data-reveal>
+          <h3>Oasis Healthcare</h3>
+          <p class="service__meta">Walk-ins welcome</p>
+          <div class="hours">
+            <div class="hours__row"><span>Monday</span><span>8am&ndash;6pm</span></div>
+            <div class="hours__row"><span>Tuesday</span><span>8am&ndash;4pm</span></div>
+            <div class="hours__row"><span>Thursday</span><span>8am&ndash;4pm</span></div>
+            <div class="hours__row"><span>Saturday</span><span>8am&ndash;12pm</span></div>
+          </div>
+          <p class="card__note">Saturday appointments recommended.</p>
         </div>
-        <div class="card">
-          <h3 class="card__title h4">Membership &amp; specialty care</h3>
-          <p class="muted">POTS, headache &amp; specialty care with Katie Henke, NP</p>
-          <a class="btn btn--primary" style="margin-top:auto;" href="https://www.tebra.com/care/provider/katie-henke-dnp-1659727345">Book with Katie</a>
+        <div class="card" data-reveal>
+          <h3>Membership and specialty care</h3>
+          <p class="service__meta">By appointment only</p>
+          <div class="hours">
+            <div class="hours__row"><span>Monday</span><span>12pm&ndash;3pm</span></div>
+            <div class="hours__row"><span>Friday</span><span>8am&ndash;2pm</span></div>
+          </div>
         </div>
-        <div class="card">
-          <h3 class="card__title h4">Oasis MedSpa</h3>
-          <p class="muted">Xeomin, IV hydration &amp; skincare</p>
-          <a class="btn btn--primary" style="margin-top:auto;" href="http://provider.kareo.com/laura-mckinnis#?view=booking">Book a MedSpa visit</a>
+        <div class="card" data-reveal>
+          <h3>Oasis MedSpa</h3>
+          <p class="service__meta">By appointment only</p>
+          <p>Call or book online to arrange a consultation.</p>
+          <a class="card__link" href="medspa.html">See MedSpa services</a>
         </div>
       </div>
-      <p class="muted" style="margin-top: var(--space-4);">Prefer to call? <a href="tel:+12624218961">(262) 421-8961</a>, or visit our <a href="https://practice.kareo.com/oasishealthcare">practice-wide booking page</a>.</p>
+      <div class="stack-md" data-reveal>
+        <a class="btn btn--line" href="https://www.google.com/maps/search/?api=1&amp;query=1505+Wisconsin+Ave+Ste+150+Grafton+WI+53024" target="_blank" rel="noopener">Get directions</a>
+      </div>
     </div>
   </section>
 
-  <section class="section">
+  <section class="section" id="booking">
     <div class="wrap">
-      <h2 class="h3">Billing &amp; payments</h2>
-      <p style="margin-top: var(--space-2); max-width: 40rem;">Billing questions: <a href="tel:5012232776">(501) 223-2776</a>. Office staff: <a href="tel:+12624218961">(262) 421-8961</a>. <a href="https://paymnt.io/ao900p">Pay your bill online</a>.</p>
+      <div class="section-head" data-reveal>
+        <h2>Book an appointment</h2>
+        <p>Book with a specific provider, or use the practice-wide page if you are not sure.</p>
+      </div>
+      <div class="grid-3 stack-lg">
+        <div class="card" data-reveal>
+          <h3>Healthcare</h3>
+          <p>Urgent care, primary care, and weight loss with Laura Mckinnis, APNP.</p>
+          <a class="card__link" href="https://www.tebra.com/care/provider/laura-mckinnis-np-1497931943">Book with Laura</a>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Membership and specialty care</h3>
+          <p>POTS, headache, and specialty care with Katie Henke, NP.</p>
+          <a class="card__link" href="https://www.tebra.com/care/provider/katie-henke-dnp-1659727345">Book with Katie</a>
+        </div>
+        <div class="card" data-reveal>
+          <h3>Oasis MedSpa</h3>
+          <p>Xeomin, IV hydration, and skincare.</p>
+          <a class="card__link" href="http://provider.kareo.com/laura-mckinnis#?view=booking">Book a MedSpa visit</a>
+        </div>
+      </div>
+      <p class="muted stack-md">Prefer to call? <a href="tel:+12624218961">(262) 421-8961</a>, or use our <a href="https://practice.kareo.com/oasishealthcare">practice-wide booking page</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--cream">
+    <div class="wrap">
+      <div class="section-head" data-reveal>
+        <h2>Billing and payments</h2>
+        <p>Questions about a bill go to our billing line, not the front desk.</p>
+      </div>
+      <p class="lede stack-md">Billing: <a href="tel:5012232776">(501) 223-2776</a>. Office staff: <a href="tel:+12624218961">(262) 421-8961</a>. <a href="https://paymnt.io/ao900p">Pay your bill online</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section--slate">
+    <div class="wrap center" data-reveal>
+      <h2 style="font-size: var(--text-h2);">We are here when you need us.</h2>
+      <div class="hero__actions" style="justify-content:center;">
+        <a class="btn btn--primary" href="https://practice.kareo.com/oasishealthcare">Book an appointment</a>
+        <a class="btn btn--line" href="tel:+12624218961">Call (262) 421-8961</a>
+      </div>
     </div>
   </section>
 </main>
@@ -123,7 +148,7 @@
         <a class="footer__logo" href="index.html" aria-label="Oasis Healthcare home">
           <img src="images/oasis-healthcare-wordmark-reversed.png" alt="Oasis Healthcare" width="1301" height="450">
         </a>
-        <p class="footer__blurb">One practice in Grafton, Wisconsin, serving the greater Milwaukee area: healthcare, membership-based specialty care, and a medical spa for restoration and rejuvenation.</p>
+        <p class="footer__blurb">One clinician-owned practice in Grafton, Wisconsin, serving the greater Milwaukee area. Urgent and primary care, membership, specialty care, and a medical spa.</p>
       </div>
       <div>
         <div class="footer__heading">Pages</div>
@@ -141,7 +166,7 @@
           <li>1505 Wisconsin Ave Ste 150<br>Grafton, WI 53024</li>
           <li><a href="tel:+12624218961">(262) 421-8961</a></li>
           <li><a href="mailto:info@oasishealthcare.net">info@oasishealthcare.net</a></li>
-          <li><a href="https://www.instagram.com/oasis.healthcare/">Instagram</a> &middot; <a href="https://www.facebook.com/OASISHEALTHCARE.hereforyou/">Facebook</a></li>
+          <li><a href="https://www.instagram.com/oasis.healthcare/">Instagram</a>&nbsp; <a href="https://www.facebook.com/OASISHEALTHCARE.hereforyou/">Facebook</a></li>
         </ul>
       </div>
     </div>
