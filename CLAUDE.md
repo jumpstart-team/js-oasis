@@ -124,19 +124,29 @@ Judgement calls made where their notes were silent, all easy to reverse:
   not be compensated. Eric also flagged the HIPAA edge, that replying to a
   review in a way that confirms someone is a patient is the risk, not the
   testimonial itself.
-- **Booking and payment links are wrong/pending.** Scheduling runs through
-  Tebra and membership/package payments have moved to **Hint**, which is live.
-  Laura is sending both sets of links. The current
-  `practice.kareo.com/oasishealthcare` CTA predates that and should be
-  replaced once they arrive.
+- **Booking and payment links are live (resolved).** Every
+  `practice.kareo.com` and `provider.kareo.com` URL is gone. Scheduling is
+  Tebra, per clinician, and membership signup/billing is Hint. Routing rule,
+  applied deliberately: **no practice-wide Tebra URL exists**, so the global
+  chrome CTAs (nav, mobile menu, and the closing CTA on index/about/contact)
+  point at `contact.html#booking`, a three-card provider chooser, rather than
+  silently defaulting every visitor to one clinician. Service pages route
+  straight to the clinician who delivers that service: healthcare,
+  health-maintenance, and medspa all go to Laura's Tebra page; Katie's page is
+  reachable from the chooser and from membership/specialty copy. Membership
+  signup goes to `oasishealthcare.hint.com/signup` from the membership hero and
+  from under the pricing tiers. If Laura later supplies a single practice-wide
+  Tebra link, the chooser hop is the thing to collapse.
 - **Location emphasis.** Grafton was pulled from the homepage hero copy at
   Laura's request ahead of the move. It stays in titles, meta, and the footer
   on purpose: `oasis-guidelines` is explicit that GBP, NAP, and schema must
   not change until the move actually happens, or local ranking suffers for a
   location they still occupy.
-- **Real photography.** Every photo slot is still an honest labelled
-  placeholder. Their Instagram and Facebook already carry real photos they own,
-  which beats both a shoot and stock on speed.
+- **Real photography.** Mostly resolved. Client photos are in and optimised
+  to WebP under `images/web/`, including both provider headshots (Laura and
+  Katie, the latter confirmed by the user as the navy-background portrait).
+  Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
+  award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the
   Facebook and Instagram channels they actively push render as bare URLs.
 
