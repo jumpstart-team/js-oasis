@@ -363,21 +363,35 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
 .split { display: grid; gap: var(--space-5); align-items: start; }
 @media (min-width: 56rem) { .split { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--space-7); } }
 
-.service-list { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-6); }
+/* Two-up, title and body stacked inside each item. The previous full-width
+   two-column row ran ~92 characters per line at 1440px; comfortable is 45-75.
+   Two columns bring it to ~67 while still using the full width, which a single
+   centred column would not. Shared by Healthcare, Health Maintenance, and
+   MedSpa, so it has to survive both three items and five. A trailing odd item
+   simply sits in its own column: letting it span looked like a bug, a
+   full-width card with copy filling only the left half of it. */
+.service-list { display: grid; gap: var(--space-3); margin-top: var(--space-6); }
+@media (min-width: 48rem) {
+  /* align-items:start so each card is only as tall as its copy. These entries
+     vary a lot (three lines beside six on MedSpa) and equal-height rows left
+     several lines of dead space inside the shorter card. */
+  .service-list { grid-template-columns: repeat(2, 1fr); gap: var(--space-4); align-items: start; }
+}
 .service {
-  display: grid; gap: var(--space-2);
+  position: relative; isolation: isolate;
+  display: flex; flex-direction: column; gap: var(--space-1);
   background: var(--color-white);
   border: 1px solid rgba(29,33,41,0.08);
   border-radius: var(--radius-lg);
   padding: var(--space-4);
   box-shadow: var(--shadow-raised);
 }
-@media (min-width: 48rem) {
-  .service { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--space-5); padding: var(--space-5); align-items: start; }
-}
+@media (min-width: 48rem) { .service { padding: var(--space-5) var(--space-4); } }
 .service h3 { font-size: var(--text-h4); }
-.service p { font-size: var(--text-sm); color: var(--color-slate); }
+.service p { font-size: var(--text-sm); color: var(--color-slate); max-width: 34rem; }
 .service__meta { font-size: var(--text-sm); color: var(--color-accent-deep); font-weight: 600; }
+/* a little air before the body copy, without needing a class on every <p> */
+.service > p:last-child { margin-top: var(--space-1); }
 
 /* ---------------------------------------------------------------------
    Team
