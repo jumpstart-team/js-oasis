@@ -94,9 +94,9 @@ a:focus-visible, button:focus-visible {
 [data-reveal].reveal-armed.is-visible { opacity: 1; translate: 0 0; }
 /* Items in one row otherwise arrive together; a small offset per item reads as
    composed rather than a block fading in. */
-.grid-3 > *:nth-child(2), .grid-4 > *:nth-child(2), .team > *:nth-child(2) { --reveal-delay: 90ms; }
-.grid-3 > *:nth-child(3), .grid-4 > *:nth-child(3), .team > *:nth-child(3) { --reveal-delay: 180ms; }
-.grid-4 > *:nth-child(4) { --reveal-delay: 270ms; }
+.grid-3 > *:nth-child(2), .grid-4 > *:nth-child(2), .routes > *:nth-child(2), .team > *:nth-child(2) { --reveal-delay: 90ms; }
+.grid-3 > *:nth-child(3), .grid-4 > *:nth-child(3), .routes > *:nth-child(3), .team > *:nth-child(3) { --reveal-delay: 180ms; }
+.grid-4 > *:nth-child(4), .routes > *:nth-child(4) { --reveal-delay: 270ms; }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal].reveal-armed { opacity: 1; translate: none; transition: none; }
 }
@@ -193,6 +193,22 @@ a:focus-visible, button:focus-visible {
   }
 }
 .hero__content { position: relative; z-index: 2; max-width: 46rem; }
+/* Centered variant. The default scrim is weighted left because the text sits
+   left; once the text is centred the protection has to move with it, so this
+   swaps to a radial that is strongest through the middle and lets the photo
+   read at the edges where nothing sits. Centre stays at 0.93+, which holds
+   accent-deep at 4.73:1 worst-case over a near-black photo. */
+.hero--centered .hero__content { margin-inline: auto; text-align: center; }
+.hero--centered .hero__lede { margin-inline: auto; }
+.hero--centered .hero__actions, .hero--centered .hero__points { justify-content: center; }
+@media (min-width: 56rem) {
+  .hero--centered .hero__media::after {
+    background: radial-gradient(ellipse at center,
+      rgba(255,255,255,0.95) 0%,
+      rgba(255,255,255,0.93) 50%,
+      rgba(255,255,255,0.70) 100%);
+  }
+}
 .hero h1 { font-size: var(--text-h1); }
 @media (min-width: 48rem) { .hero h1 { font-size: var(--text-h1-lg); } }
 @media (min-width: 72rem) { .hero--photo h1 { font-size: var(--text-h1-xl); } }
@@ -322,6 +338,20 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
    moment on a membership page. */
 .price { font-family: var(--font-display); font-size: var(--text-display); font-weight: 600; color: var(--color-accent-deep); line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 .price span { font-family: var(--font-body); font-size: var(--text-base); font-weight: 500; color: var(--color-slate); letter-spacing: 0; }
+
+/* ---------------------------------------------------------------------
+   Payment routes. Deliberately NOT cards: the client wants pricing on the
+   homepage but "a little smaller" and less money-heavy, so this is a plain
+   text row that states the figures without the visual weight of four cards.
+--------------------------------------------------------------------- */
+.routes { display: grid; gap: var(--space-4); margin-top: var(--space-6); }
+@media (min-width: 48rem) { .routes { grid-template-columns: repeat(2, 1fr); gap: var(--space-5); } }
+@media (min-width: 64rem) { .routes { grid-template-columns: repeat(4, 1fr); } }
+.route { display: flex; flex-direction: column; gap: 0.15rem; }
+.route__name { font-family: var(--font-display); font-size: var(--text-h4); line-height: 1.2; }
+.route__name a:hover { color: var(--color-accent-deep); text-decoration: underline; }
+.route__price { font-weight: 600; color: var(--color-accent-deep); font-variant-numeric: tabular-nums; }
+.route__note { font-size: var(--text-sm); color: var(--color-slate); }
 
 /* ---------------------------------------------------------------------
    Prose blocks and service lists

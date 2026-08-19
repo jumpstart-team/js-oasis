@@ -60,7 +60,12 @@ fork and drift.
 The flow they asked for, and what the pages implement:
 
 1. Hero on **"from illness to wellness"** (their own live-site tagline, not
-   invented) framed around convenient, cost-effective care.
+   invented), centred, opening on mission rather than money. Laura: "I don't
+   love the financials being in the first paragraph, I'd rather it start with
+   why we do what we do," so the lede leads with "Everyone deserves great
+   healthcare" (her phrasing) and names the three services with no pricing.
+   The centred variant swaps the hero scrim from a left-weighted gradient to a
+   radial, because protection has to sit where the text sits.
 2. **"How we care for you"**, now **three** services in illness→wellness order,
    each with its own page: Healthcare (urgent care plus primary care and
    disease management) → Health Maintenance and Prevention (weight loss,
@@ -69,8 +74,18 @@ The flow they asked for, and what the pages implement:
    `healthcare.html`; the client asked for three services and three menu
    pages, so `health-maintenance.html` was split out and the `#prevention`
    anchor retired.
-3. **"Accessing care is simple and affordable"**: membership/DPC, commercial
-   insurance, discounted cash rate, employer-sponsored plans.
+3. **"How we do it"**: membership/DPC, commercial insurance, discounted cash
+   rate, employer-sponsored plans. Headings are Laura's "what we do / how we
+   do it" pairing. Pricing stays on the homepage because she wants it seen,
+   but as a compact text row rather than four cards: "I would like it there,
+   but yeah, like a little smaller."
+
+**Insurance copy is deliberately non-specific.** Named carriers were removed
+everywhere. Laura: coverage "is shifting very quickly" and "I'd rather not be
+super specific on what we take." Every mention is now "most commercial
+insurances, including Medicare and Medicaid," and carries her required
+caveat that **not every provider accepts insurance**. Do not reinstate a
+carrier list.
 
 Judgement calls made where their notes were silent, all easy to reverse:
 
@@ -86,8 +101,9 @@ Judgement calls made where their notes were silent, all easy to reverse:
   asked for, so removing it from navigation would bury the conversion path.
 - A compressed **providers strip** was kept although their flow omitted a team
   section, because clinician-ownership is the strongest trust signal available.
-  It features Laura and Katie per the client's request; Kelly Plagemann is a
-  real provider and remains on `about.html`, which is the full team page.
+  It features Laura and Katie. Kelly Plagemann has been removed from the site
+  entirely per Laura ("she's really not here very much, we probably shouldn't
+  spend any time putting her stuff up there"), confirmed by the user.
 
 `previews/` holds the three original A/B/C options, frozen as reference only.
 
@@ -101,10 +117,23 @@ Judgement calls made where their notes were silent, all easy to reverse:
   question, but it is the highest-value page missing.
 - **Women's health / HRT.** Requested in the intake form, still no specifics
   supplied. HRT copy also needs a clinician review pass before publication.
-- **Testimonials.** There are none anywhere, and none existed on any of the
-  original 17 live pages either. For a trust-led membership pitch this is the
-  biggest conversion gap. Google reviews are the obvious source; needs client
-  sign-off on which ones and permission to quote.
+- **Testimonials.** Still none on the site. Laura has now explicitly asked for
+  "a place for patient reviews and testimonials because we do have a lot of
+  that," so this is approved in principle and only needs the content. Video is
+  in scope: keep clips under 30 seconds, ideally 15 to 20, and patients must
+  not be compensated. Eric also flagged the HIPAA edge, that replying to a
+  review in a way that confirms someone is a patient is the risk, not the
+  testimonial itself.
+- **Booking and payment links are wrong/pending.** Scheduling runs through
+  Tebra and membership/package payments have moved to **Hint**, which is live.
+  Laura is sending both sets of links. The current
+  `practice.kareo.com/oasishealthcare` CTA predates that and should be
+  replaced once they arrive.
+- **Location emphasis.** Grafton was pulled from the homepage hero copy at
+  Laura's request ahead of the move. It stays in titles, meta, and the footer
+  on purpose: `oasis-guidelines` is explicit that GBP, NAP, and schema must
+  not change until the move actually happens, or local ranking suffers for a
+  location they still occupy.
 - **Real photography.** Every photo slot is still an honest labelled
   placeholder. Their Instagram and Facebook already carry real photos they own,
   which beats both a shoot and stock on speed.
