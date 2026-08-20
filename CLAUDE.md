@@ -137,13 +137,20 @@ Laura's marked-up review of the built site. Applied in full except where noted.
 - **Clinic hours.** She asked for them to be updated but did not supply the new
   set. The site still shows Mon 8-6, Tue 8-4, Thu 8-4, Sat 8-12 for the clinic
   and Mon 12-3, Fri 8-2 for membership. Do not guess these.
-- **Homepage H1.** She asked for a marketing opinion between "From illness to
-  wellness" and "Convenient. Cost Effective. Care." Nothing changed in the repo;
-  both were rendered as screenshots for her to compare. The recommendation on
-  record is to keep "From illness to wellness": it is already theirs, it maps to
-  the three services in order, "Cost Effective" in an H1 contradicts her own
-  earlier note about not opening on financials, and the alternate line-breaks
-  badly, splitting "Cost Effective" across two lines at desktop width.
+- **Homepage H1: resolved, both lines are used.** "From illness to wellness"
+  stays as the H1 and "Convenient. Cost Effective. Care." sits under it as a
+  `.hero__tagline` support line. Two of the client's own photos settled the
+  equity question that earlier notes got wrong: the clinic window decal reads
+  "Convenient.CostEffective.Care." and the parade banner reads "Convenient +
+  Cost-Effective Care", so **both candidates are theirs**, and an earlier claim
+  that the alternate was not is a correction on record. The H1 keeps the line
+  that maps to the three services in order and avoids opening on price, which
+  was Laura's own stated preference; the tagline keeps the line patients
+  already associate with the building.
+  The wrap is load-bearing: the markup carries a non-breaking space inside
+  "Cost&nbsp;Effective" and the tagline steps from 18px to 22px only at 30rem.
+  Without both, the compound splits across lines at 320 to 414px. Verified one
+  line at 375px and up, clean sentence-boundary break at 320px.
 - **MedSpa "Fully Integrated Health and Wellness" package.** She flagged it with
   "Laura to decide." Left untouched. Worth noting when she answers: it is clinic
   access, 4 sick visits, and 1 annual physical, which is a membership offer
