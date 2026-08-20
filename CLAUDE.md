@@ -202,12 +202,11 @@ Laura's marked-up review of the built site. Applied in full except where noted.
   the second misidentification in this photo set, so treat every unlabelled
   portrait as unknown until the client names it, and never infer a face from
   surrounding context.
-  **Still needed: a file for Katie Henke, NP, and one for Tom.** The client
-  has supplied Katie's headshot as a chat image but not as a file in the repo,
-  so `index.html`, `about.html`, and `pots.html` all show a labelled
-  placeholder for her. Drop the file into `images/` and derive it the same way
-  as the others. The only group shot is a Christmas parade photo with staff,
-  family, and children mixed together, so it is not a source for either.
+  Katie's own headshot arrived as `images/katie-henke.jpeg` and is derived to
+  `person-katie.webp`, used on `index.html`, `about.html`, and `pots.html`.
+  **Still needed: a photo of Tom**, who keeps a labelled `.ph--avatar` slot on
+  `about.html`. The only group shot is a Christmas parade photo with staff,
+  family, and children mixed together, so it is not a source for him.
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the
