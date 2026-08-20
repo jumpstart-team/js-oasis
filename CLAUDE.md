@@ -190,6 +190,13 @@ Laura's marked-up review of the built site. Applied in full except where noted.
 - **Real photography.** Mostly resolved. Client photos are in and optimised
   to WebP under `images/web/`, including both provider headshots (Laura and
   Katie, the latter confirmed by the user as the navy-background portrait).
+  `about.html` now carries headshots for Laura, Katie, and Adam.
+  **Still needed: headshots for Angela Wenzel and Tom.** Both currently show a
+  labelled `.ph--avatar` placeholder on `about.html`. Nothing in the supplied
+  photo set is a usable portrait of either, and the only group shot is a
+  Christmas parade photo with staff, family, and children mixed together, so
+  guessing which face is which would risk putting the wrong person beside a
+  name. Ask the client rather than cropping the group shot.
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the

@@ -256,6 +256,9 @@ a:focus-visible, button:focus-visible {
 .ph--wide { aspect-ratio: 16 / 9; }
 .ph--person { aspect-ratio: 1; border-radius: 50%; width: 9rem; margin-inline: auto; padding: var(--space-2); }
 .ph--person span { max-width: 7rem; }
+.ph--avatar { aspect-ratio: 1; border-radius: 50%; width: 5.5rem; padding: var(--space-1); margin-bottom: var(--space-3); }
+.ph--avatar svg { width: 1.25rem; height: 1.25rem; }
+.ph--avatar span { font-size: 0.75rem; max-width: 4.5rem; }
 .section--slate .ph { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.3); color: var(--color-white); }
 
 .hero__photo-label {
@@ -285,6 +288,9 @@ a:focus-visible, button:focus-visible {
 /* Square-source portraits in a split column. Do NOT use .photo--wide here: the
    sources are 1:1, so a 16/9 crop takes the top of the head off. */
 .photo--portrait { aspect-ratio: 1; max-width: 22rem; border-radius: var(--radius-lg); }
+/* Headshot inside a left-aligned bio card. .photo--person centres itself, which
+   reads wrong above ranged-left text, so this one keeps its left edge. */
+.photo--avatar { aspect-ratio: 1; width: 5.5rem; border-radius: 50%; margin-bottom: var(--space-3); }
 
 /* ---------------------------------------------------------------------
    Grids
@@ -432,6 +438,26 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
 .team__role { font-size: var(--text-sm); color: var(--color-slate); }
 .section--slate .team__role { color: rgba(255,255,255,0.8); }
 .team__bio { font-size: var(--text-sm); color: var(--color-slate); margin-top: var(--space-2); text-align: left; }
+
+/* CTA cell inside the team strip. With two people the auto-fill grid leaves
+   empty tracks to their right; this drops the "meet the full team" link into
+   the first of them rather than parking a lone pill button underneath. */
+.team__cta { display: flex; align-items: center; justify-content: center; }
+@media (min-width: 48rem) {
+  .team__cta { justify-content: flex-start; align-items: flex-start; }
+  /* Sit on the circles' midline, not the row's. 4.5rem is half of the 9rem
+     .photo--person circle; the em backs off half a line of text. Keyed to the
+     circle rather than the row so a name wrapping to two lines cannot shift it. */
+  .team__cta a { padding-top: calc(4.5rem - 0.7em); }
+}
+.team__cta a {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-weight: 600; color: var(--color-accent-deep); text-decoration: none;
+}
+.team__cta a span { text-decoration: underline; text-underline-offset: 3px; }
+.team__cta svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; transition: transform 240ms var(--ease-out); }
+.team__cta a:hover svg { transform: translateX(7px); transition: transform var(--dur-bounce) var(--ease-bounce); }
+@media (prefers-reduced-motion: reduce) { .team__cta svg, .team__cta a:hover svg { transition: none; transform: none; } }
 
 /* ---------------------------------------------------------------------
    FAQ accordion. The row snaps rather than animating grid-template-rows,
