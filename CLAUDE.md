@@ -188,15 +188,19 @@ Laura's marked-up review of the built site. Applied in full except where noted.
   reduced emphasis, it is a broken address. GBP and any future schema are
   untouched.
 - **Real photography.** Mostly resolved. Client photos are in and optimised
-  to WebP under `images/web/`, including both provider headshots (Laura and
-  Katie, the latter confirmed by the user as the navy-background portrait).
-  `about.html` now carries headshots for Laura, Katie, and Adam.
-  **Still needed: headshots for Angela Wenzel and Tom.** Both currently show a
-  labelled `.ph--avatar` placeholder on `about.html`. Nothing in the supplied
-  photo set is a usable portrait of either, and the only group shot is a
-  Christmas parade photo with staff, family, and children mixed together, so
-  guessing which face is which would risk putting the wrong person beside a
-  name. Ask the client rather than cropping the group shot.
+  to WebP under `images/web/`. `about.html` carries headshots for Laura,
+  Angela, and Adam.
+  **The navy-background portrait is Angela Wenzel, RN, not Katie.** It was
+  briefly published as Katie on three pages and the user corrected it. That is
+  the second misidentification in this photo set, so treat every unlabelled
+  portrait as unknown until the client names it, and never infer a face from
+  surrounding context.
+  **Still needed: a file for Katie Henke, NP, and one for Tom.** The client
+  has supplied Katie's headshot as a chat image but not as a file in the repo,
+  so `index.html`, `about.html`, and `pots.html` all show a labelled
+  placeholder for her. Drop the file into `images/` and derive it the same way
+  as the others. The only group shot is a Christmas parade photo with staff,
+  family, and children mixed together, so it is not a source for either.
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the

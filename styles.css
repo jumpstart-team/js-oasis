@@ -259,6 +259,7 @@ a:focus-visible, button:focus-visible {
 .ph--avatar { aspect-ratio: 1; border-radius: 50%; width: 5.5rem; padding: var(--space-1); margin-bottom: var(--space-3); }
 .ph--avatar svg { width: 1.25rem; height: 1.25rem; }
 .ph--avatar span { font-size: 0.75rem; max-width: 4.5rem; }
+.ph--portrait { aspect-ratio: 1; max-width: 22rem; }
 .section--slate .ph { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.3); color: var(--color-white); }
 
 .hero__photo-label {
