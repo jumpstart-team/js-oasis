@@ -107,14 +107,50 @@ Judgement calls made where their notes were silent, all easy to reverse:
 
 `previews/` holds the three original A/B/C options, frozen as reference only.
 
+## Client feedback round, 2026-08-20
+
+Laura's marked-up review of the built site. Applied in full except where noted.
+
+- Hero lede replaced with her own wording (illness or injury / prevention or
+  disease management / clinically guided aesthetics, all under one roof).
+- **"How we do it"** subhead is now her line, second sentence only: "Choose the
+  way that works for you." Her first sentence ("Healthcare should be accessible
+  to everyone") was dropped because the hero one screen up already opens on
+  "Everyone deserves great healthcare," which is the same idea twice.
+- POTS added to the homepage Healthcare card and given a full service block on
+  `healthcare.html`, per her "add Katie's POTS practice to healthcare."
+- Walk-in copy now reads "walk-ins welcome during clinic hours" on both
+  `contact.html` and `healthcare.html`.
+- `health-maintenance.html` gained **School and sports physicals** and **DOT
+  and pre-employment physicals** as their own services. The DOT copy there is
+  deliberately worded differently from the DOT block on `healthcare.html`, which
+  stays, so the two pages are not duplicate content.
+- MedSpa: the five-blend **IV hydration menu grid is removed**. The $199 base
+  fluid / $29 per additive pricing was kept, in the IV entry under Services. It
+  is real, currently advertised, and the one MedSpa number they do publish.
+- Adam is now "Registration, EMT," no longer "in training."
+- The billing line "Questions about a bill go to our billing line, not the front
+  desk" is gone. Per Laura, patients do come to the front desk.
+
+**Open, waiting on the client:**
+
+- **Clinic hours.** She asked for them to be updated but did not supply the new
+  set. The site still shows Mon 8-6, Tue 8-4, Thu 8-4, Sat 8-12 for the clinic
+  and Mon 12-3, Fri 8-2 for membership. Do not guess these.
+- **Homepage H1.** She asked for a marketing opinion between "From illness to
+  wellness" and "Convenient. Cost Effective. Care." Nothing changed in the repo;
+  both were rendered as screenshots for her to compare. The recommendation on
+  record is to keep "From illness to wellness": it is already theirs, it maps to
+  the three services in order, "Cost Effective" in an H1 contradicts her own
+  earlier note about not opening on financials, and the alternate line-breaks
+  badly, splitting "Cost Effective" across two lines at desktop width.
+- **MedSpa "Fully Integrated Health and Wellness" package.** She flagged it with
+  "Laura to decide." Left untouched. Worth noting when she answers: it is clinic
+  access, 4 sick visits, and 1 annual physical, which is a membership offer
+  sitting in the MedSpa grid competing with the $99/mo plan.
+
 ## Not yet built, worth raising
 
-- **A dedicated POTS page.** `oasis-guidelines` calls Katie Henke's POTS and
-  autonomic line the most under-exploited asset on the account, notes it is a
-  national-search term rather than a local one, and lists "does it get its own
-  page" as the single biggest SEO decision here. Currently POTS only appears as
-  a section on `membership.html`. Not built unasked, since it is an open
-  question, but it is the highest-value page missing.
 - **Women's health / HRT.** Requested in the intake form, still no specifics
   supplied. HRT copy also needs a clinician review pass before publication.
 - **Testimonials.** Still none on the site. Laura has now explicitly asked for
@@ -137,11 +173,20 @@ Judgement calls made where their notes were silent, all easy to reverse:
   signup goes to `oasishealthcare.hint.com/signup` from the membership hero and
   from under the pricing tiers. If Laura later supplies a single practice-wide
   Tebra link, the chooser hop is the thing to collapse.
-- **Location emphasis.** Grafton was pulled from the homepage hero copy at
-  Laura's request ahead of the move. It stays in titles, meta, and the footer
-  on purpose: `oasis-guidelines` is explicit that GBP, NAP, and schema must
-  not change until the move actually happens, or local ranking suffers for a
-  location they still occupy.
+- **Location emphasis: Grafton is now removed from all descriptive copy.**
+  Laura's 2026-08-20 feedback said "not sure we should have location," and the
+  user chose full removal. Grafton is gone from every `<title>`, every meta
+  description, the footer blurb, and all page prose, including the contact H1
+  (now "Visit us.").
+  **This was done over a stated objection and is reversible in one commit.**
+  `oasis-guidelines` warns local ranking will likely soften for a location they
+  still occupy and still need patients to find; that risk was accepted
+  knowingly, not overlooked. Do not "fix" it back without asking.
+  One carve-out applied on judgement: the literal NAP address block
+  (`1505 Wisconsin Ave Ste 150, Grafton, WI 53024`) and the Google Maps
+  directions query keep the city, because an address without a city is not
+  reduced emphasis, it is a broken address. GBP and any future schema are
+  untouched.
 - **Real photography.** Mostly resolved. Client photos are in and optimised
   to WebP under `images/web/`, including both provider headshots (Laura and
   Katie, the latter confirmed by the user as the navy-background portrait).
@@ -160,7 +205,7 @@ directly instead of generated:
 
 ```
 index.html, healthcare.html, health-maintenance.html, medspa.html,
-membership.html, about.html, contact.html
+pots.html, membership.html, about.html, contact.html
 tokens.css   (design tokens: real brand colors, type scale, motion)
 styles.css   (@imports tokens.css; every component lives here)
 site.js      (mobile nav, FAQ accordion, scroll reveal)

@@ -282,6 +282,9 @@ a:focus-visible, button:focus-visible {
 .photo--card { aspect-ratio: 3 / 2; }
 .photo--wide { aspect-ratio: 16 / 9; border-radius: var(--radius-lg); }
 .photo--person { aspect-ratio: 1; width: 9rem; border-radius: 50%; margin-inline: auto; }
+/* Square-source portraits in a split column. Do NOT use .photo--wide here: the
+   sources are 1:1, so a 16/9 crop takes the top of the head off. */
+.photo--portrait { aspect-ratio: 1; max-width: 22rem; border-radius: var(--radius-lg); }
 
 /* ---------------------------------------------------------------------
    Grids
