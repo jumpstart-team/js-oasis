@@ -204,9 +204,9 @@ Laura's marked-up review of the built site. Applied in full except where noted.
   surrounding context.
   Katie's own headshot arrived as `images/katie-henke.jpeg` and is derived to
   `person-katie.webp`, used on `index.html`, `about.html`, and `pots.html`.
-  **Still needed: a photo of Tom**, who keeps a labelled `.ph--avatar` slot on
-  `about.html`. The only group shot is a Christmas parade photo with staff,
-  family, and children mixed together, so it is not a source for him.
+  Tom's headshot arrived as `images/tom.webp` and is derived to
+  `person-tom.webp`. **Every photo slot on the site now holds a real client
+  photo; there are no placeholders left.**
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the

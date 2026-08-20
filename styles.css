@@ -198,7 +198,11 @@ a:focus-visible, button:focus-visible {
       rgba(255,255,255,0.42) 100%);
   }
 }
-.hero__content { position: relative; z-index: 2; max-width: 46rem; }
+/* 68rem, not 46rem: at 46rem every hero H1 wrapped to two lines while ~1184px
+   of page sat unused beside it, which is a break the title never needed. The
+   lede keeps its own 36rem measure below, so widening this only frees the
+   headline. Longest H1 on the site needs 971px; 68rem is 1088px. */
+.hero__content { position: relative; z-index: 2; max-width: 68rem; }
 /* Centered variant. The default scrim is weighted left because the text sits
    left; once the text is centred the protection has to move with it, so this
    swaps to a radial that is strongest through the middle and lets the photo
