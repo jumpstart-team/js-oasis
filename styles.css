@@ -442,6 +442,38 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
 /* a little air before the body copy, without needing a class on every <p> */
 .service > p:last-child { margin-top: var(--space-1); }
 
+/* "What we treat" on Healthcare only: even card heights, plus the same hover
+   lift/tint/glow as the homepage service cards (.card--interactive). A
+   modifier rather than a change to .service-list/.service directly, since
+   Health Maintenance and MedSpa deliberately keep align-items:start (see the
+   note above .service-list) for their more uneven item lengths. */
+@media (min-width: 48rem) { .service-list--even { align-items: stretch; } }
+.service--interactive { transition: transform var(--dur-base) var(--ease-out); }
+.service--interactive::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: rgba(217,77,42,0.05);
+  opacity: 0; transition: opacity 240ms ease;
+  z-index: -1; pointer-events: none;
+}
+.service--interactive::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  box-shadow:
+    0 0 0 1.5px rgba(185,63,33,0.45),
+    0 0 0 6px rgba(217,77,42,0.10),
+    var(--shadow-lifted);
+  opacity: 0; transition: opacity 240ms ease;
+  pointer-events: none;
+}
+.service--interactive:hover {
+  transform: translateY(-10px) scale(1.014);
+  transition: transform var(--dur-bounce) var(--ease-bounce);
+}
+.service--interactive:hover::before, .service--interactive:hover::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .service--interactive { transition: none; }
+  .service--interactive:hover { transform: none; }
+}
+
 /* ---------------------------------------------------------------------
    Team
 --------------------------------------------------------------------- */
