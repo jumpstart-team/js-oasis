@@ -444,6 +444,10 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
 .service__meta { font-size: var(--text-sm); color: var(--color-accent-deep); font-weight: 600; }
 /* a little air before the body copy, without needing a class on every <p> */
 .service > p:last-child { margin-top: var(--space-1); }
+/* Icon glyph, first child of a .service. Sized as a large graphical element,
+   so --color-accent is correct here (it fails the small-text contrast floor,
+   but icons are exempt, same reasoning as .card__list's bullet dots). */
+.service__icon { width: 2rem; height: 2rem; color: var(--color-accent); margin-bottom: var(--space-1); }
 
 /* "What we treat" on Healthcare only: even card heights, plus the same hover
    lift/tint/glow as .card. A modifier rather than a change to
