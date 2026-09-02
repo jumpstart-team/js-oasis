@@ -491,6 +491,7 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
    still works unchanged if a third person is added back. */
 @media (min-width: 48rem) { .team { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); } }
 .team__item { text-align: center; }
+.team__item > a { display: block; }
 .team__name { font-family: var(--font-display); font-size: var(--text-h4); margin-top: var(--space-3); }
 .team__role { font-size: var(--text-sm); color: var(--color-slate); }
 .section--slate .team__role { color: rgba(255,255,255,0.8); }
