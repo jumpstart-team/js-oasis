@@ -236,6 +236,26 @@ a:focus-visible, button:focus-visible {
 @media (min-width: 30rem) { .hero__tagline { font-size: var(--text-h4); } }
 .hero--centered .hero__tagline { margin-inline: auto; }
 .hero__lede { font-size: var(--text-xl); max-width: 36rem; margin-top: var(--space-4); color: var(--color-slate); }
+
+/* Hero pair list: replaces the lede paragraph with three short "X or Y"
+   lines plus a closing statement, rather than a sentence. The "or" is set
+   in the body face at slate, smaller than its neighbours, so it reads as a
+   quiet connector and the two options carry the visual weight. */
+.hero__pairs { margin-top: var(--space-4); display: flex; flex-direction: column; gap: var(--space-1); }
+.hero__pairs p {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: var(--text-h4); line-height: 1.25; color: var(--color-ink);
+}
+@media (min-width: 30rem) { .hero__pairs p { font-size: var(--text-h3); } }
+.hero__pairs .or {
+  font-family: var(--font-body); font-weight: 400; font-size: var(--text-base);
+  color: var(--color-slate); margin-inline: 0.3em;
+}
+.hero__closer {
+  margin-top: var(--space-3); font-family: var(--font-display); font-weight: 500;
+  font-size: var(--text-h3); color: var(--color-accent-deep);
+}
+@media (min-width: 30rem) { .hero__closer { font-size: var(--text-h2); } }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-5); }
 .hero__points { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin-top: var(--space-5); font-size: var(--text-sm); font-weight: 600; color: var(--color-accent-deep); }
 
