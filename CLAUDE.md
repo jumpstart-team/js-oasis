@@ -205,8 +205,34 @@ Laura's marked-up review of the built site. Applied in full except where noted.
   Katie's own headshot arrived as `images/katie-henke.jpeg` and is derived to
   `person-katie.webp`, used on `index.html`, `about.html`, and `pots.html`.
   Tom's headshot arrived as `images/tom.webp` and is derived to
-  `person-tom.webp`. **Every photo slot on the site now holds a real client
-  photo; there are no placeholders left.**
+  `person-tom.webp`. Every headshot and clinic-interior slot on the site
+  holds a real client photo; there are no placeholders left.
+  **Stock photography, deliberately introduced, first exception to
+  "no stock" on this project.** Every rule above this point in the doc was
+  written against a "real photos only, no stock standing in for the
+  practice's own photography" standard (see the `.ph` placeholder CSS
+  comment in `styles.css`, and the MedSpa hero note further up this file).
+  The client supplied 4 stock photos (Unsplash-style filenames,
+  `images/photo-*.avif`) specifically to fill the "may need more medical
+  imagery" gap flagged twice: once on the homepage hero, once generally for
+  Aesthetics and Wellness. 3 of the 4 are in use: an anti-wrinkle injection
+  and a facial treatment (`stock-medspa-xeomin.webp`,
+  `stock-medspa-microneedling.webp`) in a photo row after the MedSpa hero,
+  and a blood-pressure check (`stock-healthcare-vitals.webp`) after the
+  Healthcare hero. The 4th, an extreme macro face close-up, was judged too
+  ambiguous out of context and left unused (source file kept in `images/`
+  regardless, same convention as every other unused raw upload).
+  Scope was deliberately kept to supporting photography within page
+  sections, not hero backgrounds: Healthcare and MedSpa's plain text-only
+  heroes were left as-is rather than given a stock photo background, since a
+  hero photo is the single most prominent image on a page and using stock
+  there would be a far more visible break from "every photo here is real"
+  than a supporting image partway down the page. Alt text on all three is
+  generic ("A clinician administering an anti-wrinkle injection," not
+  anything implying it was shot at this clinic or of real Oasis staff),
+  since these are not Laura's, Katie's, or Angela's clinic and claiming
+  otherwise in alt text would be a factual misrepresentation independent of
+  whether a sighted visitor ever notices.
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the
