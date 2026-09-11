@@ -616,6 +616,11 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
 .hero__photo--prevention { background-position: 50% 38%; }
 .hero__photo--about      { background-position: 50% 62%; }
 .hero__photo--contact    { background-position: 50% 30%; }
+/* MedSpa anchors to the bottom because all of its content is the fabric
+   pooling on the floor. Its file is also cut taller than the others, to
+   2.2:1, so it matches what this hero actually renders. See the note above
+   its line in scripts/fetch-photos.sh. */
+.hero__photo--medspa     { background-position: 50% 100%; }
 
 /* ---------------------------------------------------------------------
    Section band photography.
