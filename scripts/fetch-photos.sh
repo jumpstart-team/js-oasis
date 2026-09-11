@@ -52,12 +52,20 @@ fetch hero-healthcare  1780139815926-ea90709b2010  1800 675 crop=entropy 72
 # 2A  health-maintenance.html  fr0ggy5, exam room diagnostic wall
 fetch hero-prevention  1682365114794-14b870355d21  1800 675 crop=entropy 72
 # 3A  medspa.html              Katsia Jazwinska, beige curtain in soft light
-#     The automatic crop took a band across the middle of the frame, which put
-#     the headline over empty wall and cut the curtain off at the bottom edge.
-#     This rect is the lower 1836 rows of the 4896x3264 original, which is the
-#     fabric pooling on the floor plus the wood boards, and it matches the
-#     output ratio exactly so nothing crops twice.
-fetch hero-medspa      1578500467296-441a11d5d55a  1800 675 rect=0,1428,4896,1836 72
+#     This one is 1800x800, not 1800x675 like the rest, and that is deliberate.
+#     The hero renders at about 2.26:1, not the 2.67:1 the 675-tall files are
+#     cut to, so background-size:cover scales those to fill the height and
+#     crops roughly 15 percent off each side. Every other photo here carries
+#     its subject near the middle and survives that. This one carried its
+#     subject at the left and bottom edges, so the crop threw the fabric out
+#     of frame and left the headline sitting on blank wall.
+#
+#     The rect is the fabric pooling on the floor plus the wood boards, taken
+#     at 2.2:1 so the file matches what the hero actually renders. Paired with
+#     background-position:50% 100% in styles.css, so that when a short wide
+#     viewport does crop vertically it takes the wall off the top rather than
+#     the fabric off the bottom.
+fetch hero-medspa      1578500467296-441a11d5d55a  1800 800 rect=0,1700,3441,1564 72
 # 4B  membership.html          Marija Zaric, shadows on a textured wall corner
 fetch hero-membership  1754555680193-606fb5ffd6b1  1800 675 crop=entropy 72
 # 5A  about.html               Rosemary Williams, a dock on a lake at dawn
