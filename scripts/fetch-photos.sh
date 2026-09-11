@@ -21,34 +21,45 @@ mkdir -p "$OUT"
 
 CDN="https://images.unsplash.com/photo-"
 
-# fetch <filename> <photo-id> <width> <height> <crop-mode>
+# Sizes are set to what the page actually shows, not to the largest file
+# Unsplash will serve. These bands are full-bleed, so 1800px covers a 1440
+# viewport with headroom and stops there; 2400px cost 1.4MB across nine files
+# against a repo whose existing images run 29-75KB.
+#
+# Band quality runs lower than hero quality on purpose. Every band sits behind
+# a scrim at 0.93 or heavier, and compression artifacts are not visible
+# through that. band-hours goes lowest because rippling water is the noisiest
+# subject in the set and the most expensive to encode.
+#
+# fetch <filename> <photo-id> <width> <height> <crop-mode> <webp-quality>
 fetch () {
-  local name="$1" id="$2" w="$3" h="$4" crop="$5"
+  local name="$1" id="$2" w="$3" h="$4" crop="$5" q="$6"
   echo "-> $name"
   curl -fsSL -o "$TMP/$name.jpg" \
-    "${CDN}${id}?w=${w}&h=${h}&fit=crop&crop=${crop}&q=88&fm=jpg"
-  cwebp -quiet -q 78 -m 6 "$TMP/$name.jpg" -o "$OUT/$name.webp"
+    "${CDN}${id}?w=${w}&h=${h}&fit=crop&crop=${crop}&q=85&fm=jpg"
+  cwebp -quiet -q "$q" -m 6 "$TMP/$name.jpg" -o "$OUT/$name.webp"
+  printf '   %s KB\n' "$(( $(stat -c%s "$OUT/$name.webp") / 1024 ))"
 }
 
-# --- Page heroes: 2400x900, the site's 2.68:1 hero band ---------------------
+# --- Page heroes: 1800x675, the site's 2.68:1 hero band ---------------------
 # 1A  healthcare.html          Maximilian Bungart, sunlit corner with a plant
-fetch hero-healthcare  1780139815926-ea90709b2010  2400 900 entropy
+fetch hero-healthcare  1780139815926-ea90709b2010  1800 675 entropy 72
 # 2A  health-maintenance.html  fr0ggy5, exam room diagnostic wall
-fetch hero-prevention  1682365114794-14b870355d21  2400 900 entropy
+fetch hero-prevention  1682365114794-14b870355d21  1800 675 entropy 72
 # 3A  medspa.html              Katsia Jazwinska, beige curtain in soft light
-fetch hero-medspa      1578500467296-441a11d5d55a  2400 900 entropy
+fetch hero-medspa      1578500467296-441a11d5d55a  1800 675 entropy 72
 # 4B  membership.html          Marija Zaric, shadows on a textured wall corner
-fetch hero-membership  1754555680193-606fb5ffd6b1  2400 900 entropy
+fetch hero-membership  1754555680193-606fb5ffd6b1  1800 675 entropy 72
 # 5A  about.html               Rosemary Williams, a dock on a lake at dawn
-fetch hero-about       1665782670881-96d1c710704a  2400 900 entropy
+fetch hero-about       1665782670881-96d1c710704a  1800 675 entropy 72
 # 6A  pots.html                Puscas Adryan, a chair in sunlight by a window
-fetch hero-pots        1765948079484-3bb1af6e5268  2400 900 entropy
+fetch hero-pots        1765948079484-3bb1af6e5268  1800 675 entropy 72
 
 # contact.html's hero uses images/web/wide-exterior.webp, the practice's own
 # storefront photo, which was already in this repo and unreferenced. Nothing
 # to fetch for it.
 
-# --- Section bands: 2400x680, the site's 3.5:1 band --------------------------
+# --- Section bands: 1800x510, the site's 3.5:1 band --------------------------
 # 8B  .section--slate, all 8 pages    John Ettema, white wall
 #
 #     TESTED ON THE LIVE PAGE, AND IT DOES NOT WORK. Behind the slate scrim
@@ -61,15 +72,15 @@ fetch hero-pots        1765948079484-3bb1af6e5268  2400 900 entropy
 #     Built as chosen. To switch to 8A, comment the line below and uncomment
 #     the one after it. 8A is Yanhao Fang, sunlight streaks on textured
 #     concrete, which keeps visible structure through the scrim.
-fetch band-cta         1617614649797-16d75555a2bc  2400 680 entropy
-# fetch band-cta       1758545344431-e41113f70d58  2400 680 entropy   # 8A
+fetch band-cta         1617614649797-16d75555a2bc  1800 510 entropy 62
+# fetch band-cta       1758545344431-e41113f70d58  1800 510 entropy 62   # 8A
 # 9B  index.html #access              Marija Zaric, wall corner
 #     crop=right on purpose: 9B and hero-membership (4B) are the same
 #     photographer shooting the same subject. Different crop regions keep the
 #     two from reading as one image reused.
-fetch band-access      1784447355410-8d29a6bd49e6  2400 680 right
+fetch band-access      1784447355410-8d29a6bd49e6  1800 510 right 62
 # 10B contact.html #hours             ekrem osmanoglu, rippling green water
-fetch band-hours       1781877771212-afb6542b3169  2400 680 entropy
+fetch band-hours       1781877771212-afb6542b3169  1800 510 entropy 55
 
 echo
 echo "Done. Files in $OUT:"
