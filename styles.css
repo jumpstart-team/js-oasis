@@ -302,6 +302,10 @@ a:focus-visible, button:focus-visible {
   border-radius: var(--radius-md);
 }
 .photo--card { aspect-ratio: 3 / 2; }
+/* Square crop for a card-media header built from a 1:1 headshot source
+   (bio cards). Same slot .photo--card fills for the 3:2 homepage service
+   photos, different aspect, so a portrait headshot isn't stretched. */
+.photo--card-square { aspect-ratio: 1; }
 .photo--wide { aspect-ratio: 16 / 9; border-radius: var(--radius-lg); }
 /* A supporting photo standing alone in its own section (not paired with
    text in a .split, not one of several in a grid) reads as a hero at full
@@ -313,9 +317,6 @@ a:focus-visible, button:focus-visible {
 /* Square-source portraits in a split column. Do NOT use .photo--wide here: the
    sources are 1:1, so a 16/9 crop takes the top of the head off. */
 .photo--portrait { aspect-ratio: 1; max-width: 22rem; border-radius: var(--radius-lg); }
-/* Headshot inside a left-aligned bio card. .photo--person centres itself, which
-   reads wrong above ranged-left text, so this one keeps its left edge. */
-.photo--avatar { aspect-ratio: 1; width: 5.5rem; border-radius: 50%; margin-bottom: var(--space-3); }
 
 /* ---------------------------------------------------------------------
    Grids
