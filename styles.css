@@ -303,6 +303,12 @@ a:focus-visible, button:focus-visible {
 }
 .photo--card { aspect-ratio: 3 / 2; }
 .photo--wide { aspect-ratio: 16 / 9; border-radius: var(--radius-lg); }
+/* A supporting photo standing alone in its own section (not paired with
+   text in a .split, not one of several in a grid) reads as a hero at full
+   .wrap width. This caps it well short of that and adds a card-style
+   shadow, so it sits like a deliberately placed inset image instead of a
+   stretched, oversized one. */
+.photo--support { max-width: 30rem; margin-inline: auto; box-shadow: var(--shadow-raised); }
 .photo--person { aspect-ratio: 1; width: 9rem; border-radius: 50%; margin-inline: auto; }
 /* Square-source portraits in a split column. Do NOT use .photo--wide here: the
    sources are 1:1, so a 16/9 crop takes the top of the head off. */
