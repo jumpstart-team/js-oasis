@@ -589,3 +589,105 @@ a.card:hover .card__arrow svg { transform: translateX(7px); transition: transfor
   transition: top var(--dur-fast) var(--ease-out);
 }
 .skip-link:focus { top: var(--space-2); }
+
+/* ---------------------------------------------------------------------
+   Page hero photography.
+   .hero__photo hard-codes hero-clinic.webp, so each interior page points at
+   its own file with a modifier rather than re-declaring the block. The scrim
+   above is untouched: the left-weighted gradient already protects the text
+   zone at the measured 0.94 and still lets the right third of each photo
+   read, which is where every photo below carries its subject.
+   Free Unsplash photography except contact, which is the practice's own
+   storefront. Provenance is in CREDITS.md.
+--------------------------------------------------------------------- */
+.hero__photo--healthcare { background-image: url("images/web/hero-healthcare.webp"); }
+.hero__photo--prevention { background-image: url("images/web/hero-prevention.webp"); }
+.hero__photo--medspa     { background-image: url("images/web/hero-medspa.webp"); }
+.hero__photo--membership { background-image: url("images/web/hero-membership.webp"); }
+.hero__photo--about      { background-image: url("images/web/hero-about.webp"); }
+.hero__photo--pots       { background-image: url("images/web/hero-pots.webp"); }
+.hero__photo--contact    { background-image: url("images/web/wide-exterior.webp"); }
+
+/* Two photos carry their subject low in the frame and lose it when the band
+   crops on a short viewport, so the focal point moves up rather than the
+   crop changing. Contact sits high instead: the suite number and the logo
+   decal are in the upper half of the storefront shot and are the whole
+   reason for using it. */
+.hero__photo--prevention { background-position: 50% 38%; }
+.hero__photo--about      { background-position: 50% 62%; }
+.hero__photo--contact    { background-position: 50% 30%; }
+
+/* ---------------------------------------------------------------------
+   Section band photography.
+   These three bands were carrying no image and the most open space on the
+   site: the slate call-to-action repeats on all eight pages at 408-454px
+   tall for as little as 58 characters. No media layer is added, because
+   each band's content already sits inside .wrap, so a layered background on
+   the section is enough and nothing needs restacking.
+   Each wash keeps the band's own colour as the base layer, so if an image
+   is ever removed the section degrades to exactly what it is today.
+--------------------------------------------------------------------- */
+.section--slate {
+  position: relative;
+  background-color: var(--color-slate);
+  background-image:
+    linear-gradient(100deg,
+      rgba(60,72,90,0.93) 0%,
+      rgba(60,72,90,0.86) 40%,
+      rgba(60,72,90,0.58) 78%,
+      rgba(60,72,90,0.42) 100%),
+    url("images/web/band-cta.webp");
+  background-size: cover, cover;
+  background-position: 50% 50%, 50% 50%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+#access {
+  position: relative;
+  background-image:
+    linear-gradient(100deg,
+      rgba(255,255,255,0.96) 0%,
+      rgba(255,255,255,0.94) 44%,
+      rgba(255,255,255,0.70) 78%,
+      rgba(255,255,255,0.48) 100%),
+    url("images/web/band-access.webp");
+  background-size: cover, cover;
+  background-position: 50% 50%, 50% 50%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+#hours {
+  position: relative;
+  background-image:
+    linear-gradient(100deg,
+      rgba(250,247,244,0.96) 0%,
+      rgba(250,247,244,0.94) 44%,
+      rgba(250,247,244,0.68) 78%,
+      rgba(250,247,244,0.44) 100%),
+    url("images/web/band-hours.webp");
+  background-size: cover, cover;
+  background-position: 50% 50%, 50% 50%;
+  background-repeat: no-repeat, no-repeat;
+}
+
+/* Below 56rem the copy fills the full width, so a directional wash leaves the
+   last lines sitting on open photo. Each band flattens to a near-solid
+   vertical fade, matching what .hero__media::after already does at this
+   width. */
+@media (max-width: 55.999rem) {
+  .section--slate {
+    background-image:
+      linear-gradient(180deg, rgba(60,72,90,0.94) 0%, rgba(60,72,90,0.84) 100%),
+      url("images/web/band-cta.webp");
+  }
+  #access {
+    background-image:
+      linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.88) 100%),
+      url("images/web/band-access.webp");
+  }
+  #hours {
+    background-image:
+      linear-gradient(180deg, rgba(250,247,244,0.95) 0%, rgba(250,247,244,0.88) 100%),
+      url("images/web/band-hours.webp");
+  }
+}
