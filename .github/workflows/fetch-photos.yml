@@ -1,0 +1,41 @@
+# Fetches the site's stock photography and commits it.
+#
+# The photos live on Unsplash rather than in this repo, so a machine with
+# network access has to pull them. This runs on demand from the Actions tab
+# rather than on push: the files change only when someone changes a pick in
+# scripts/fetch-photos.sh, and re-downloading nine images on every commit
+# would be waste.
+#
+# Run it from Actions -> Fetch photography -> Run workflow.
+
+name: Fetch photography
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install the webp encoder
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq webp
+
+      - name: Fetch and convert
+        run: bash scripts/fetch-photos.sh
+
+      - name: Commit the images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/web
+          if git diff --staged --quiet; then
+            echo "No image changes."
+          else
+            git commit -m "Add the hero and section band photography" -m "Fetched and converted by .github/workflows/fetch-photos.yml. Picks and provenance are in CREDITS.md."
+            git push
+          fi
