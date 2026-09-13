@@ -39,7 +39,8 @@ updates" for the full reasoning):
 - **Weight loss elevated in prominence** per Laura's explicit request (it's
   a major patient-acquisition channel) — has its own home-page band and a
   dedicated section on `healthcare.html`, not just a bullet in a service list.
-- Real social links added (Instagram, Facebook — from the intake form).
+- Real social links added (Instagram, Facebook — from the intake form;
+  LinkedIn added later, supplied directly by the user).
 - **Not yet added:** Women's health / HRT content — the intake form requests
   it but gave no specifics (services, provider, pricing); explicitly waiting
   on the client rather than inventing details. Also not yet added: numeric
