@@ -222,19 +222,29 @@ Laura's marked-up review of the built site. Applied in full except where noted.
   Healthcare hero. The 4th, an extreme macro face close-up, was judged too
   ambiguous out of context and left unused (source file kept in `images/`
   regardless, same convention as every other unused raw upload).
-  Scope was deliberately kept to supporting photography within page
-  sections, not hero backgrounds: Healthcare and MedSpa's plain text-only
-  heroes were left as-is rather than given a stock photo background, since a
-  hero photo is the single most prominent image on a page and using stock
-  there would be a far more visible break from "every photo here is real"
-  than a supporting image partway down the page. Alt text on all three is
-  generic ("A clinician administering an anti-wrinkle injection," not
-  anything implying it was shot at this clinic or of real Oasis staff),
-  since these are not Laura's, Katie's, or Angela's clinic and claiming
-  otherwise in alt text would be a factual misrepresentation independent of
-  whether a sighted visitor ever notices.
+  Alt text on all three is generic ("A clinician administering an
+  anti-wrinkle injection," not anything implying it was shot at this clinic
+  or of real Oasis staff), since these are not Laura's, Katie's, or Angela's
+  clinic and claiming otherwise in alt text would be a factual
+  misrepresentation independent of whether a sighted visitor ever notices.
   Unused so far: the Grafton Chamber 2022 Outstanding Business of the Year
   award photo and the team group shots.
+  **Superseded: stock now extends to hero backgrounds too.** The paragraph
+  above originally kept scope to supporting photography only, reasoning that
+  a hero photo is a page's single most prominent image and stock there would
+  be a far more visible break from "every photo here is real" than a
+  supporting image partway down the page. A separate session then shipped
+  photo backgrounds on every interior hero (Healthcare, Health Maintenance,
+  MedSpa, Membership, About, POTS, Contact) plus two homepage section bands
+  (`#access`, the slate closing CTA), fetched via
+  `scripts/fetch-photos.sh` and `.github/workflows/fetch-photos.yml`
+  (workflow_dispatch only, re-run from the Actions tab when a pick in the
+  script changes), with provenance in `CREDITS.md`. Nine of the ten are free
+  Unsplash photography with no recognizable face, patient, or clinical space
+  presented as Oasis; the tenth (contact hero) is the practice's own
+  storefront photo, already in the repo. Confirmed with the user 2026-09-13
+  that this expansion stands ("stock is fine for now"), so it is not a gap
+  to walk back, just a scope change from the original call above.
 - **Open Graph / structured data.** No page has OG tags, so links shared to the
   Facebook and Instagram channels they actively push render as bare URLs.
 
