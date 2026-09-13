@@ -203,22 +203,38 @@ a:focus-visible, button:focus-visible {
    lede keeps its own 36rem measure below, so widening this only frees the
    headline. Longest H1 on the site needs 971px; 68rem is 1088px. */
 .hero__content { position: relative; z-index: 2; max-width: 68rem; }
-/* Centered variant. The default scrim is weighted left because the text sits
-   left; once the text is centred the protection has to move with it, so this
-   swaps to a radial that is strongest through the middle and lets the photo
-   read at the edges where nothing sits. Centre stays at 0.93+, which holds
-   accent-deep at 4.73:1 worst-case over a near-black photo. */
-.hero--centered .hero__content { margin-inline: auto; text-align: center; }
-.hero--centered .hero__lede { margin-inline: auto; }
-.hero--centered .hero__actions, .hero--centered .hero__points { justify-content: center; }
-@media (min-width: 56rem) {
-  .hero--centered .hero__media::after {
-    background: radial-gradient(ellipse at center,
-      rgba(255,255,255,0.95) 0%,
-      rgba(255,255,255,0.93) 50%,
-      rgba(255,255,255,0.70) 100%);
+/* Centered variant. Rather than a full-hero scrim, the photo shows through
+   everywhere and a single bounded card sits behind the text column, so the
+   room and the wall sign stay visible instead of being washed out edge to
+   edge. The card alone carries the contrast requirement now, so it keeps the
+   same 0.94 a full scrim needed: over a worst-case near-black pixel in this
+   photo, accent-deep drops below the 4.5:1 AA floor below that opacity
+   (measured against the actual rendered hero, not guessed). The wash outside
+   the card is just a light unifying tint, not a contrast surface. */
+.hero--centered .hero__media::after { background: rgba(255,255,255,0.15); }
+/* width:100% below 48rem, not fit-content: the tagline's one-line requirement
+   (see the hero__tagline comment above) depends on the full measure of
+   .wrap. Stealing width for card padding on a narrow screen reflows "Care."
+   onto its own line, exactly the break that comment documents fixing. The
+   card only hugs the text once there is width to spare. */
+.hero--centered .hero__content {
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+  background: rgba(255,255,255,0.94);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-2);
+  box-shadow: var(--shadow-overlay);
+}
+@media (min-width: 48rem) {
+  .hero--centered .hero__content {
+    width: fit-content;
+    max-width: 100%;
+    padding: var(--space-6) var(--space-7);
   }
 }
+.hero--centered .hero__lede { margin-inline: auto; }
+.hero--centered .hero__actions, .hero--centered .hero__points { justify-content: center; }
 .hero h1 { font-size: var(--text-h1); }
 @media (min-width: 48rem) { .hero h1 { font-size: var(--text-h1-lg); } }
 @media (min-width: 72rem) { .hero--photo h1 { font-size: var(--text-h1-xl); } }
